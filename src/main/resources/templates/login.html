@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+    <link href="/css/login-page.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
+</head>
+<body class="login-page">
+<div class="login-avatar" style="background: url('/img/avatar.jpg') no-repeat center center;"
+     onmouseover="this.style.cursor='pointer'" onclick="document.location='/'">
+</div>
+<div class="login-form">
+    <div class="login-content">
+        <form name="loginForm">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="用户名"
+                           autocomplete="off"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-key"></i>
+                    </div>
+                    <input type="password" class="form-control" name="passBefore" id="passBefore" placeholder="密码"
+                           autocomplete="off"/>
+                    <input type="hidden" name="password" id="password"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-block btn-login" id="login-admin">
+                    <i class="fa fa-sign-in"></i>
+                    login
+                </button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-block btn-login" id="regist-admin">
+                    <i class="fa fa-sign-in"></i>
+                    regist
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/jquery.bootstrap-growl.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.3.1/js/md5.min.js"></script>
+<script src="/js/login-form.js"></script>
+</body>
+</html>

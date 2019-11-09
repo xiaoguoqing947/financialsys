@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>注册界面</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="/css/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script type="text/javascript">
+    function disable()
+    {
+      document.getElementById("regist-user").disabled=true
+    }
+    function enable()
+    {
+      document.getElementById("regist-user").disabled=false
+    }
+  </script>
+</head>
+<body class="hold-transition register-page" >
+<div class="register-box">
+    <div class="register-logo">
+        <a href="/login" style="color: #ffffff">理财宝</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">点击上方<span style='color: red'>理财宝</span>返回主页面</p>
+            <p class="login-box-msg"><span style='color: red'>*</span>&nbsp;该标识为必填字段</p>
+
+            <form action="/register.action" method="post" id="registForm">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="请输入用户名" id="username" name="username">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="请输入邮箱" id="email" name="email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="请输入密码" id="password" name="password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="请确认密码" id="confirm_password"
+                           name="confirm_password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" value="agree" onclick="if (this.checked) {enable()} else {disable()}">
+                            <label for="agreeTerms">
+                                我同意这些<a href="#" id="term-info">条款</a>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block" id="regist-user" disabled >注册</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+        </div>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<!--zui-->
+<script src="/js/zui.js"></script>
+<!-- AdminLTE App -->
+<script src="/js/adminlte.min.js"></script>
+<!--表单验证-->
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/messages_zh.js"></script>
+<!--md5加密-->
+<script src="//cdn.bootcss.com/blueimp-md5/2.3.1/js/md5.min.js"></script>
+<script src="/js/login-form.js"></script>
+</body>
+</html>

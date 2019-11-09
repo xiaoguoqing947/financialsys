@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Lockscreen</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition lockscreen">
+<!-- Automatic element centering -->
+<div class="lockscreen-wrapper">
+  <div class="lockscreen-logo">
+    <a href="#"><b>Admin</b>XGQ</a>
+  </div>
+  <!-- User name -->
+  <div class="lockscreen-name"><span   th:text="${session.admin}==null?'包包':${session.admin.username}"></span></div>
+
+  <!-- START LOCK SCREEN ITEM -->
+  <div class="lockscreen-item">
+    <!-- lockscreen image -->
+    <div class="lockscreen-image">
+      <img src="/img/avatar.jpg" alt="User Image">
+    </div>
+    <!-- /.lockscreen-image -->
+
+    <!-- lockscreen credentials (contains the form) -->
+    <form class="lockscreen-credentials">
+      <div class="input-group">
+        <input type="password" class="form-control" placeholder="password" id="password" name="password">
+        <input type="hidden" id="username" name="username" th:value="${session.admin.username}">
+        <div class="input-group-append">
+          <button type="button" class="btn" id="unlockbtn"><i class="fas fa-arrow-right text-muted"></i></button>
+        </div>
+      </div>
+    </form>
+    <!-- /.lockscreen credentials -->
+
+  </div>
+  <!-- /.lockscreen-item -->
+  <div class="help-block text-center">
+    请输入你的密码进行屏幕解锁<!--Enter your password to retrieve your session-->
+  </div>
+  <div class="text-center">
+    <a href="javascript:void(0);" onclick="loginout()">或者登入其他的账号</a>
+  </div>
+  <div class="lockscreen-footer text-center">
+    Copyright &copy; 2019 <b><a href="#" class="text-black">Mr.Xiao</a></b><br>
+  </div>
+</div>
+<!-- /.center -->
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<!--md5-->
+<script src="//cdn.bootcss.com/blueimp-md5/2.3.1/js/md5.min.js"></script>
+<script src="/js/zui.js"></script>
+<script>
+  function loginout() {
+    $.zui.store.clear(); // 清空所有本地存储的条目
+    location.href = "/logout";
+  }
+  $("#unlockbtn").click(function () {
+    var password = md5($('#password').val());
+    var username = $('#username').val();
+    $.ajax(
+            {
+              url: "/unlock.action",
+              type: 'post',
+              dataType:'JSON',
+              contentType: "application/json; charset=utf-8",
+              data: JSON.stringify({
+                password: password,
+                username: username
+              }),
+              success:function (data) {
+                if(data){
+                  history.back();
+                }else{
+                  alert("密码错误，请重新输入！")
+                  window.location.reload();
+                }
+              }
+            }
+    )
+  })
+</script>
+</body>
+</html>
