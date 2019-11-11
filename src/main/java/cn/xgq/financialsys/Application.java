@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @EnableTransactionManagement
 @MapperScan(basePackages = "cn.xgq.financialsys.mapping")
 public class Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

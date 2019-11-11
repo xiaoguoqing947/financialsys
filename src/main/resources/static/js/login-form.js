@@ -1,11 +1,14 @@
 $(document).ready(function () {
+    /*
+    服务器重启后session会清空，而存在zui中的token不会清空*/
+    $.zui.store.clear();
     var token = $.zui.store.get('token');
     var power = $.zui.store.get('power');
     if (typeof (token) != 'undefined' && token != '' && typeof (power) != 'undefined' && power != '') {
         if (power == 0) {
-            window.location.href = "/admin";
+            window.location.href = "/api/admin";
         } else if (power == 1) {
-            location.href = "/sysadmin";
+            location.href = "/api/sysadmin";
         }
     }
     $("#login-admin").bind("click",
@@ -37,9 +40,9 @@ $(document).ready(function () {
                                 $.zui.store.set('power', data.power);
                                 /*    window.location.href='/demo/testPathVariable/1/2';//测试使用*/
                                 if (data.power == 0) {
-                                    location.href = "/admin";
+                                    location.href = "/api/admin";
                                 } else if (data.power == 1) {
-                                    location.href = "/sysadmin";
+                                    location.href = "/api/sysadmin";
                                 }
                             } else {
                                 alert('账号或密码错误，请重新输入');

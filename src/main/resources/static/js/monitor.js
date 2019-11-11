@@ -1,12 +1,12 @@
 function loginout() {
     $.zui.store.clear(); // 清空所有本地存储的条目
-    location.href = "/logout";
+    location.href = "/api/logout";
 }
 
 $(document).ready(function () {
     var token = $.zui.store.get("token");
     $.ajax({
-        url: "/monitor",
+        url: "/api/monitor",
         beforeSend: function (xhr) {
             xhr.setRequestHeader("token", token);
         },

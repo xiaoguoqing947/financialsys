@@ -26,12 +26,6 @@ public class LoginCtrl {
     private UserSer userSer;
     private static final Logger LOGGER = LoggerFactory.getLogger(UserSerImpl.class);
 
-
-    @GetMapping("/")
-    public String welcome(HttpServletRequest request, Model model) {
-        return "login";
-    }
-
     @GetMapping("/login")
     public String login(HttpServletRequest request, Model model) {
         String result = request.getParameter("result");
@@ -59,7 +53,7 @@ public class LoginCtrl {
     }
 
     @ResponseBody
-    @PostMapping("/unlock.action")
+    @PostMapping("/api/unlock.action")
     public boolean unLockSceen(@RequestBody UserLoginForm form){
         boolean result=false;
         try{
@@ -70,25 +64,18 @@ public class LoginCtrl {
        return result;
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/api/logout")
     public String logout(HttpServletRequest request) {
         userSer.destroySession(request);
         return "redirect:/login";
     }
 
-    @GetMapping("/register")
-    public String register(){
-        return "register";
-    }
-
     @ResponseBody
     @PostMapping("/register.action")
     public Map<String,Object> doRegister(@RequestBody @Valid UserRegistForm form){
-//        System.out.println(form.toString());
         Map<String,Object> resultMap=new HashMap<String,Object>();
         User user=new User();
         BeanUtils.copyProperties(form,user);
-//        System.out.println(user.toString());
         if(userSer.addUser(user)){
            resultMap.put("status","success");
         }else{
@@ -98,7 +85,7 @@ public class LoginCtrl {
     }
 
     @ResponseBody
-    @PostMapping("validateUname.action")
+    @PostMapping("/validateUname.action")
     public boolean validateUname(@RequestParam String username){
         boolean flag=userSer.validateUname(username);
         return flag;
