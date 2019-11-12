@@ -1,5 +1,6 @@
 package cn.xgq.financialsys.controller.admin;
 
+import cn.xgq.financialsys.annotation.SystemControllerLog;
 import cn.xgq.financialsys.util.ValidateMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class MonitorCtrl {
 
     @ResponseBody
     @PostMapping("/monitor")
+//    @SystemControllerLog(description = "查询主页面数据")
     public String monitor(HttpServletRequest request) {
         if(ValidateMethod.isTokenCheck(request)){
             return "data";

@@ -1,6 +1,8 @@
 package cn.xgq.financialsys.annotation;
 
+import cn.xgq.financialsys.domain.Log;
 import cn.xgq.financialsys.domain.dto.UserLoginForm;
+import cn.xgq.financialsys.service.inter.LogSer;
 import cn.xgq.financialsys.util.IpUtils;
 import cn.xgq.financialsys.util.JsonUtils;
 import org.aspectj.lang.JoinPoint;
@@ -18,6 +20,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 
 @Aspect
@@ -26,7 +29,7 @@ import java.lang.reflect.Method;
 public class SystemLogAspect {
     //注入Service用于把日志保存数据库，实际项目入库采用队列做异步
     @Resource
- //   private ActionService actionService;
+    private LogSer logSer;
     //本地异常日志记录对象
     private static final Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
     //Service层切点
@@ -57,14 +60,20 @@ public class SystemLogAspect {
             System.out.println("请求ip："+ip);
 
             //*========数据库日志=========*//
-           /* Action action = new Action();
-            action.setActionDes(getControllerMethodDescription(joinPoint));
-            action.setActionType("0");
-            action.setActionIp(ip);
-            action.setUserId(user.getId());
-            action.setActionTime(new Date());
+            Log log = new Log();
+            log.setLogDesc(getControllerMethodDescription(joinPoint));
+            log.setLogKey((joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName()));
+            log.setIpAddress(ip);
+            log.setUsername(user.getUsername());
+            log.setCreateTime(new Date());
+            log.setUpdateTime(new Date());
+            log.setType(0);
             //保存数据库
-            actionService.add(action);*/
+            if (logSer.addLog(log)){
+                System.out.println("添加日志成功！");
+            }else{
+                System.out.println("添加日志失败！");
+            }
 
         }catch (Exception e){
             //记录本地异常日志
@@ -121,14 +130,20 @@ public class SystemLogAspect {
             System.out.println("请求IP:" + ip);
             System.out.println("请求参数:" + params);
             /*==========数据库日志=========*/
-           /* Action action = new Action();
-            action.setActionDes(getServiceMethodDescription(joinPoint));
-            action.setActionType("1");
-            action.setUserId(user.getId());
-            action.setActionIp(ip);
-            action.setActionTime(new Date());
-            //保存到数据库
-            actionService.add(action);*/
+            Log log = new Log();
+            log.setLogDesc(getControllerMethodDescription(joinPoint));
+            log.setLogKey((joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
+            log.setIpAddress(ip);
+            log.setUsername(user.getUsername());
+            log.setUpdateTime(new Date());
+            log.setUpdateTime(new Date());
+            log.setType(0);
+            //保存数据库
+            if (logSer.addLog(log)){
+                System.out.println("添加日志成功！");
+            }else{
+                System.out.println("添加日志失败！");
+            }
         }catch (Exception ex){
             //记录本地异常日志
             logger.error("==异常通知异常==");

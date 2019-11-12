@@ -49,6 +49,7 @@ public class UserSerImpl implements UserSer {
         //对象不存在返回true
         try {
             user = userMapper.queryUserByUsername(username);
+            System.out.println(user.toString());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
