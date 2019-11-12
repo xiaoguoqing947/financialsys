@@ -18,7 +18,6 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        logger.info(request.getMethod()+"--"+request.getRequestURI());
         UserLoginForm user = (UserLoginForm) session.getAttribute("admin");
         if (user == null) {
             response.setContentType("text/html;charset=UTF-8");

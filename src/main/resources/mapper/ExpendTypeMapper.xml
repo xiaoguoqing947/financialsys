@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xgq.financialsys.mapping.ExpendTypeMapper">
+  <resultMap id="BaseResultMap" type="cn.xgq.financialsys.domain.ExpendType">
+    <id column="expend_type_id" jdbcType="INTEGER" property="expendTypeId" />
+    <result column="enpend_type" jdbcType="VARCHAR" property="enpendType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    expend_type_id, enpend_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from expendtype
+    where expend_type_id = #{expendTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from expendtype
+    where expend_type_id = #{expendTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.xgq.financialsys.domain.ExpendType">
+    insert into expendtype (expend_type_id, enpend_type)
+    values (#{expendTypeId,jdbcType=INTEGER}, #{enpendType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xgq.financialsys.domain.ExpendType">
+    insert into expendtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expendTypeId != null">
+        expend_type_id,
+      </if>
+      <if test="enpendType != null">
+        enpend_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expendTypeId != null">
+        #{expendTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="enpendType != null">
+        #{enpendType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xgq.financialsys.domain.ExpendType">
+    update expendtype
+    <set>
+      <if test="enpendType != null">
+        enpend_type = #{enpendType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where expend_type_id = #{expendTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xgq.financialsys.domain.ExpendType">
+    update expendtype
+    set enpend_type = #{enpendType,jdbcType=VARCHAR}
+    where expend_type_id = #{expendTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

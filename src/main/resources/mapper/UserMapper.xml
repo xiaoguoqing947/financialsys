@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xgq.financialsys.mapping.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.xgq.financialsys.domain.User">
+    <id column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="power" jdbcType="VARCHAR" property="power" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="born" jdbcType="TIMESTAMP" property="born" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="contact_number" jdbcType="VARCHAR" property="contactNumber" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="regist_data" jdbcType="TIMESTAMP" property="registData" />
+    <result column="opr_date" jdbcType="TIMESTAMP" property="oprDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    username, password, name, power, sex, born, pic, contact_number, email, address, 
+    regist_data, opr_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xgq.financialsys.domain.User">
+    insert into user (username, password, name, 
+      power, sex, born, 
+      pic, contact_number, email, 
+      address, regist_data, opr_date
+      )
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{power,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{born,jdbcType=TIMESTAMP}, 
+      #{pic,jdbcType=VARCHAR}, #{contactNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{registData,jdbcType=TIMESTAMP}, #{oprDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xgq.financialsys.domain.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="power != null">
+        power,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="born != null">
+        born,
+      </if>
+      <if test="pic != null">
+        pic,
+      </if>
+      <if test="contactNumber != null">
+        contact_number,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="registData != null">
+        regist_data,
+      </if>
+      <if test="oprDate != null">
+        opr_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null">
+        #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="born != null">
+        #{born,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="registData != null">
+        #{registData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oprDate != null">
+        #{oprDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xgq.financialsys.domain.User">
+    update user
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null">
+        power = #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="born != null">
+        born = #{born,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="registData != null">
+        regist_data = #{registData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oprDate != null">
+        opr_date = #{oprDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xgq.financialsys.domain.User">
+    update user
+    set password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      power = #{power,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      born = #{born,jdbcType=TIMESTAMP},
+      pic = #{pic,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      regist_data = #{registData,jdbcType=TIMESTAMP},
+      opr_date = #{oprDate,jdbcType=TIMESTAMP}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+
+  <select id="queryByLogin" resultType="int">
+        select count(*) from user
+        where username=#{un} and password=#{pw}
+  </select>
+
+  <select id="queryUserByUsername" resultMap="BaseResultMap">
+        select * from user
+        where username=#{un}
+  </select>
+
+  <insert id="insertUser">
+    insert into user(username,password,email,regist_data)
+    values(#{u.username},#{u.password},#{u.email},#{u.registDate})
+  </insert>
+
+  <select id="queryUserPower" resultType="int">
+    select power from user where username=#{un}
+  </select>
+
+</mapper>

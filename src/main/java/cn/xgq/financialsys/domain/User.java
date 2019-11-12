@@ -1,5 +1,6 @@
 package cn.xgq.financialsys.domain;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

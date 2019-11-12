@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xgq.financialsys.mapping.IncomeMapper">
+  <resultMap id="BaseResultMap" type="cn.xgq.financialsys.domain.Income">
+    <id column="income_id" jdbcType="INTEGER" property="incomeId" />
+    <result column="income_type_id" jdbcType="INTEGER" property="incomeTypeId" />
+    <result column="income_source" jdbcType="VARCHAR" property="incomeSource" />
+    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
+    <result column="pay_account" jdbcType="VARCHAR" property="payAccount" />
+    <result column="income_price" jdbcType="DOUBLE" property="incomePrice" />
+    <result column="income_date" jdbcType="TIMESTAMP" property="incomeDate" />
+    <result column="income_user" jdbcType="VARCHAR" property="incomeUser" />
+    <result column="income_desc" jdbcType="VARCHAR" property="incomeDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    income_id, income_type_id, income_source, pay_method, pay_account, income_price, 
+    income_date, income_user, income_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from income
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from income
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.xgq.financialsys.domain.Income">
+    insert into income (income_id, income_type_id, income_source, 
+      pay_method, pay_account, income_price, 
+      income_date, income_user, income_desc
+      )
+    values (#{incomeId,jdbcType=INTEGER}, #{incomeTypeId,jdbcType=INTEGER}, #{incomeSource,jdbcType=VARCHAR}, 
+      #{payMethod,jdbcType=VARCHAR}, #{payAccount,jdbcType=VARCHAR}, #{incomePrice,jdbcType=DOUBLE}, 
+      #{incomeDate,jdbcType=TIMESTAMP}, #{incomeUser,jdbcType=VARCHAR}, #{incomeDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xgq.financialsys.domain.Income">
+    insert into income
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="incomeId != null">
+        income_id,
+      </if>
+      <if test="incomeTypeId != null">
+        income_type_id,
+      </if>
+      <if test="incomeSource != null">
+        income_source,
+      </if>
+      <if test="payMethod != null">
+        pay_method,
+      </if>
+      <if test="payAccount != null">
+        pay_account,
+      </if>
+      <if test="incomePrice != null">
+        income_price,
+      </if>
+      <if test="incomeDate != null">
+        income_date,
+      </if>
+      <if test="incomeUser != null">
+        income_user,
+      </if>
+      <if test="incomeDesc != null">
+        income_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="incomeId != null">
+        #{incomeId,jdbcType=INTEGER},
+      </if>
+      <if test="incomeTypeId != null">
+        #{incomeTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="incomeSource != null">
+        #{incomeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethod != null">
+        #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccount != null">
+        #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="incomePrice != null">
+        #{incomePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="incomeDate != null">
+        #{incomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomeUser != null">
+        #{incomeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeDesc != null">
+        #{incomeDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xgq.financialsys.domain.Income">
+    update income
+    <set>
+      <if test="incomeTypeId != null">
+        income_type_id = #{incomeTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="incomeSource != null">
+        income_source = #{incomeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethod != null">
+        pay_method = #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccount != null">
+        pay_account = #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="incomePrice != null">
+        income_price = #{incomePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="incomeDate != null">
+        income_date = #{incomeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomeUser != null">
+        income_user = #{incomeUser,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeDesc != null">
+        income_desc = #{incomeDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xgq.financialsys.domain.Income">
+    update income
+    set income_type_id = #{incomeTypeId,jdbcType=INTEGER},
+      income_source = #{incomeSource,jdbcType=VARCHAR},
+      pay_method = #{payMethod,jdbcType=VARCHAR},
+      pay_account = #{payAccount,jdbcType=VARCHAR},
+      income_price = #{incomePrice,jdbcType=DOUBLE},
+      income_date = #{incomeDate,jdbcType=TIMESTAMP},
+      income_user = #{incomeUser,jdbcType=VARCHAR},
+      income_desc = #{incomeDesc,jdbcType=VARCHAR}
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </update>
+</mapper>

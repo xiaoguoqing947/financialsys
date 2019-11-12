@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xgq.financialsys.mapping.ExpendMapper">
+  <resultMap id="BaseResultMap" type="cn.xgq.financialsys.domain.Expend">
+    <id column="expend_id" jdbcType="INTEGER" property="expendId" />
+    <result column="expend_type_id" jdbcType="INTEGER" property="expendTypeId" />
+    <result column="expend_use" jdbcType="VARCHAR" property="expendUse" />
+    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
+    <result column="pay_account" jdbcType="VARCHAR" property="payAccount" />
+    <result column="expend_date" jdbcType="TIMESTAMP" property="expendDate" />
+    <result column="expend_user" jdbcType="VARCHAR" property="expendUser" />
+    <result column="expend_desc" jdbcType="VARCHAR" property="expendDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    expend_id, expend_type_id, expend_use, pay_method, pay_account, expend_date, expend_user, 
+    expend_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from expend
+    where expend_id = #{expendId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from expend
+    where expend_id = #{expendId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.xgq.financialsys.domain.Expend">
+    insert into expend (expend_id, expend_type_id, expend_use, 
+      pay_method, pay_account, expend_date, 
+      expend_user, expend_desc)
+    values (#{expendId,jdbcType=INTEGER}, #{expendTypeId,jdbcType=INTEGER}, #{expendUse,jdbcType=VARCHAR}, 
+      #{payMethod,jdbcType=VARCHAR}, #{payAccount,jdbcType=VARCHAR}, #{expendDate,jdbcType=TIMESTAMP}, 
+      #{expendUser,jdbcType=VARCHAR}, #{expendDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xgq.financialsys.domain.Expend">
+    insert into expend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expendId != null">
+        expend_id,
+      </if>
+      <if test="expendTypeId != null">
+        expend_type_id,
+      </if>
+      <if test="expendUse != null">
+        expend_use,
+      </if>
+      <if test="payMethod != null">
+        pay_method,
+      </if>
+      <if test="payAccount != null">
+        pay_account,
+      </if>
+      <if test="expendDate != null">
+        expend_date,
+      </if>
+      <if test="expendUser != null">
+        expend_user,
+      </if>
+      <if test="expendDesc != null">
+        expend_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expendId != null">
+        #{expendId,jdbcType=INTEGER},
+      </if>
+      <if test="expendTypeId != null">
+        #{expendTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="expendUse != null">
+        #{expendUse,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethod != null">
+        #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccount != null">
+        #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="expendDate != null">
+        #{expendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expendUser != null">
+        #{expendUser,jdbcType=VARCHAR},
+      </if>
+      <if test="expendDesc != null">
+        #{expendDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xgq.financialsys.domain.Expend">
+    update expend
+    <set>
+      <if test="expendTypeId != null">
+        expend_type_id = #{expendTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="expendUse != null">
+        expend_use = #{expendUse,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethod != null">
+        pay_method = #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccount != null">
+        pay_account = #{payAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="expendDate != null">
+        expend_date = #{expendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expendUser != null">
+        expend_user = #{expendUser,jdbcType=VARCHAR},
+      </if>
+      <if test="expendDesc != null">
+        expend_desc = #{expendDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where expend_id = #{expendId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xgq.financialsys.domain.Expend">
+    update expend
+    set expend_type_id = #{expendTypeId,jdbcType=INTEGER},
+      expend_use = #{expendUse,jdbcType=VARCHAR},
+      pay_method = #{payMethod,jdbcType=VARCHAR},
+      pay_account = #{payAccount,jdbcType=VARCHAR},
+      expend_date = #{expendDate,jdbcType=TIMESTAMP},
+      expend_user = #{expendUser,jdbcType=VARCHAR},
+      expend_desc = #{expendDesc,jdbcType=VARCHAR}
+    where expend_id = #{expendId,jdbcType=INTEGER}
+  </update>
+</mapper>
