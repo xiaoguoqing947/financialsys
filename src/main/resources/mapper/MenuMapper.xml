@@ -125,4 +125,18 @@
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findMenuList" parameterType="java.util.Map" resultType="java.util.HashMap">
+    select * from menu
+    <where>
+      <if test="m_name !=null">
+        and name=#{m_name}
+      </if>
+    </where>
+    <if test="pageSize != null">
+      <if test="currentPage != null">
+        limit #{indexCount},#{pageSize}
+      </if>
+    </if>
+  </select>
 </mapper>

@@ -1,6 +1,9 @@
 package cn.xgq.financialsys.controller.admin;
 
 import cn.xgq.financialsys.annotation.SystemControllerLog;
+import cn.xgq.financialsys.domain.Menu;
+import cn.xgq.financialsys.enums.MessageMeta;
+import cn.xgq.financialsys.service.inter.MenuSer;
 import cn.xgq.financialsys.util.ValidateMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,15 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
- * 后台管理中监控页面
- * 目前只包括内存占用的监控
- */
 @Controller
 @RequestMapping("/api")
 public class MonitorCtrl {
+
+    @Autowired
+    private MenuSer menuSer;
+
     @GetMapping("/lockscreen")
     public String lockScreen() {
         return "module/lockscreen";
@@ -26,12 +34,18 @@ public class MonitorCtrl {
 
     @ResponseBody
     @PostMapping("/monitor")
-//    @SystemControllerLog(description = "查询主页面数据")
-    public String monitor(HttpServletRequest request) {
-        if(ValidateMethod.isTokenCheck(request)){
-            return "data";
-        }else{
-            return "123";
+    public Map<String, Object> monitor(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (ValidateMethod.isTokenCheck(request)) {
+            resultMap.put("status", MessageMeta.sendSuccess.getMsg());
+            Map<String, Object> searchMap = new HashMap<String, Object>();
+            List<Map<String, Object>> menuList = null;
+            menuList = menuSer.listMenu(searchMap);
+            resultMap.put("menuList", menuList);
+        } else {
+            resultMap.put("status", MessageMeta.sendError.getMsg());
         }
+        System.err.println(resultMap);
+        return resultMap;
     }
 }

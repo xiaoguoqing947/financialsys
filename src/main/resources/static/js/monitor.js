@@ -17,7 +17,41 @@ $(document).ready(function () {
         dataType: "JSON",
         type: "POST",
         success: function (result) {
-            alert(result);
+            if (result.status == 'success') {
+                var html = '';
+                for (var i = 0; i < result.menuList.length; i++) {
+                    if (result.menuList[i].parent_id == 0) {
+                        html+='<li class="nav-item has-treeview">\n' +
+                            '            <a href="#" class="nav-link active">\n' +
+                            '              <i class="nav-icon fas fa-tachometer-alt"></i>\n' +
+                            '              <p>';
+                        html+='<p>'+result.menuList[i].name+'</p>';
+                        html+='<i class="right fas fa-angle-left"></i>\n' +
+                            '              </p>\n' +
+                            '            </a>';
+                        for (var j = 0; j < result.menuList.length; j++) {
+                            if(result.menuList[j].priority == result.menuList[i].id){
+                                html+='<ul class="nav nav-treeview">\n' +
+                                    '              <li class="nav-item" a href="javascript:void(0)" onclick="reloadMainRight()">\n' +
+                                    '                <a href="#" class="nav-link active">\n' +
+                                    '                  <i class="far fa-circle nav-icon"></i>';
+                                html+='<p>'+result.menuList[j].name+'</p>';
+                                html+='</a>\n' +
+                                    '              </li>\n' +
+                                    '            </ul>';
+                            }
+                        }
+                        html+='</li>';
+                    }
+                }
+                document.getElementById("menuId").innerHTML = html;
+            } else {
+                new $.zui.Messager('系统繁忙', {
+                    type: 'warning', // 定义颜色主题
+                    placement: 'center' // 定义显示位置
+                }).show();
+            }
+
         },
         error: function () {
             new $.zui.Messager('系统繁忙', {
@@ -27,3 +61,8 @@ $(document).ready(function () {
         }
     });
 });
+
+function reloadMainRight() {
+    alert('ok');
+}
+

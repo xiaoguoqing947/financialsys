@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <div th:fragment="copyright">
-        © 2020 Mr.xiao
+<footer class="main-footer" th:fragment="copyright">
+    <strong>Copyright &copy; 2019 <a href="#">GUMBALL-X</a>.</strong>
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 3.0.0
     </div>
+</footer>
 </body>
 </html>

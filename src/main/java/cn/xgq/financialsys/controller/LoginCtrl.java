@@ -1,9 +1,11 @@
 package cn.xgq.financialsys.controller;
 
 
+import cn.xgq.financialsys.annotation.SystemControllerLog;
 import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.domain.dto.UserLoginForm;
 import cn.xgq.financialsys.domain.dto.UserRegistForm;
+import cn.xgq.financialsys.enums.MessageMeta;
 import cn.xgq.financialsys.service.UserSerImpl;
 import cn.xgq.financialsys.service.inter.UserSer;
 import cn.xgq.financialsys.util.Token;
@@ -42,12 +44,12 @@ public class LoginCtrl {
         boolean result = userSer.login(form);
         if (result) {
             userSer.addSession(request, form);
-            resultMap.put("status","success");
+            resultMap.put("status", MessageMeta.sendSuccess.getMsg());
             resultMap.put("power",userSer.getUserPower(form.getUsername()));
             String token = Token.getTokenString(request.getSession());
             resultMap.put("token",token);
         } else {
-            resultMap.put("status","fail");
+            resultMap.put("status",MessageMeta.sendError.getMsg());
         }
         return resultMap;
     }
@@ -65,6 +67,7 @@ public class LoginCtrl {
     }
 
     @GetMapping("/api/logout")
+    @SystemControllerLog(description = "退出登录")
     public String logout(HttpServletRequest request) {
         userSer.destroySession(request);
         return "redirect:/login";
@@ -77,9 +80,9 @@ public class LoginCtrl {
         User user=new User();
         BeanUtils.copyProperties(form,user);
         if(userSer.addUser(user)){
-           resultMap.put("status","success");
+           resultMap.put("status",MessageMeta.sendSuccess.getMsg());
         }else{
-            resultMap.put("status","fail");
+            resultMap.put("status",MessageMeta.sendError.getMsg());
         }
         return resultMap;
     }
