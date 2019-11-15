@@ -176,6 +176,10 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!--内容在这块进行刷新-->
+        <div th:include="/module/header :: header"></div>
+
+        <div th:replace="/admin/pages/admin-msg :: context"></div>
+
         <div th:include="/module/footer :: copyright"></div>
     </div>
     <!-- /.content-wrapper -->
