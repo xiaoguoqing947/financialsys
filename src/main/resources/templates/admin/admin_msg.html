@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>页面信息</title>
+</head>
+<body>
+    <!-- Main content -->
+    <section class="content" th:fragment="context">
+        <div class="container-fluid" id="mainDiv">
+            <!-- Small boxes (Stat box) -->
+
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-7 connectedSortable">
+                    <!-- TO DO List -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="ion ion-clipboard mr-1"></i>
+                                书签
+                            </h3>
+
+                            <div class="card-tools">
+                                <ul class="pagination pagination-sm">
+                                    <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <ul class="todo-list" data-widget="todo-list">
+                                <li>
+                                    <!-- drag handle -->
+                                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                                    <!-- checkbox -->
+                                    <div  class="icheck-primary d-inline ml-2">
+                                        <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                        <label for="todoCheck1"></label>
+                                    </div>
+                                    <!-- todo text -->
+                                    <span class="text">设计一个好看的主题</span>
+                                    <!-- Emphasis label -->
+                                    <small class="badge badge-danger"><i class="far fa-clock"></i> 2 分钟</small>
+                                    <!-- General tools such as edit or delete-->
+                                    <div class="tools">
+                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                                    <div  class="icheck-primary d-inline ml-2">
+                                        <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
+                                        <label for="todoCheck2"></label>
+                                    </div>
+                                    <span class="text">制作主题的相依</span>
+                                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 小时后</small>
+                                    <div class="tools">
+                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                                    <div  class="icheck-primary d-inline ml-2">
+                                        <input type="checkbox" value="" name="todo3" id="todoCheck3">
+                                        <label for="todoCheck3"></label>
+                                    </div>
+                                    <span class="text">去包包加拿宠物</span>
+                                    <small class="badge badge-warning"><i class="far fa-clock"></i> 1 天后</small>
+                                    <div class="tools">
+                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                                    <div  class="icheck-primary d-inline ml-2">
+                                        <input type="checkbox" value="" name="todo4" id="todoCheck4">
+                                        <label for="todoCheck4"></label>
+                                    </div>
+                                    <span class="text">主题的信息更新</span>
+                                    <small class="badge badge-success"><i class="far fa-clock"></i> 3 天后</small>
+                                    <div class="tools">
+                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                                    <div  class="icheck-primary d-inline ml-2">
+                                        <input type="checkbox" value="" name="todo5" id="todoCheck5">
+                                        <label for="todoCheck5"></label>
+                                    </div>
+                                    <span class="text">查看你的消息</span>
+                                    <small class="badge badge-primary"><i class="far fa-clock"></i> 1 周后</small>
+                                    <div class="tools">
+                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                                    <div  class="icheck-primary d-inline ml-2">
+                                        <input type="checkbox" value="" name="todo6" id="todoCheck6">
+                                        <label for="todoCheck6"></label>
+                                    </div>
+                                    <span class="text">更改主题的样式</span>
+                                    <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 个月</small>
+                                    <div class="tools">
+                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-trash-o"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer clearfix">
+                            <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i> 添加安排</button>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </section>
+                <!-- /.Left col -->
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <!-- right col -->
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+</body>
+</html>
