@@ -1,10 +1,12 @@
 package cn.xgq.financialsys.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,7 +14,9 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @ToString
-public class User implements java.io.Serializable{
+public class User{
+    private  int power;
+
     private String username;
 
     private String password;
@@ -30,8 +34,10 @@ public class User implements java.io.Serializable{
     private String email;
 
     private String address;
-
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy/MM/dd HH:mm:ss")
     private Date registDate;
-
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy/MM/dd HH:mm:ss")
     private Date oprDate;
 }

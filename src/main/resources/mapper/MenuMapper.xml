@@ -126,11 +126,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="findMenuList" parameterType="java.util.Map" resultType="java.util.HashMap">
+  <select id="findMenuList" parameterType="java.util.Map" resultMap="BaseResultMap">
     select * from menu
     <where>
+      <if test="m_code !=null">
+        id=#{m_code}
+      </if>
       <if test="m_name !=null">
-        and name=#{m_name}
+        and name like '%${m_name}%'
       </if>
     </where>
     <if test="pageSize != null">
@@ -138,5 +141,21 @@
         limit #{indexCount},#{pageSize}
       </if>
     </if>
+  </select>
+
+  <select id="findMenuCount" parameterType="java.util.Map" resultType="int">
+    select count(*) from menu
+    <where>
+      <if test="m_code !=null">
+        id=#{m_code}
+      </if>
+      <if test="m_name !=null">
+        and name like '%${m_name}%'
+      </if>
+    </where>
+  </select>
+
+  <select id="queryMenuByName" resultType="int">
+    select count(*) from menu where name=#{m_name}
   </select>
 </mapper>

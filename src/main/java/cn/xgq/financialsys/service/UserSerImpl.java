@@ -6,16 +6,18 @@ import cn.xgq.financialsys.mapping.UserMapper;
 import cn.xgq.financialsys.service.inter.UserSer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Service
 public class UserSerImpl implements UserSer {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserSerImpl.class);
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override
@@ -70,5 +72,16 @@ public class UserSerImpl implements UserSer {
     @Override
     public int getUserPower(String username) {
         return userMapper.queryUserPower(username);
+    }
+
+    @Override
+    public boolean updatePwd(UserLoginForm userLoginForm) {
+        int num = 0;
+        try {
+            num = userMapper.updatePwdByUname(userLoginForm.getUsername(),userLoginForm.getPassword());
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return num > 0;
     }
 }

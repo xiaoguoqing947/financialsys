@@ -20,7 +20,7 @@ $(document).ready(function () {
             if (result.status == 'success') {
                 var html = '';
                 for (var i = 0; i < result.menuList.length; i++) {
-                    if (result.menuList[i].parent_id == 0) {
+                    if (result.menuList[i].parentId == 0) {
                         html+='<li class="nav-item has-treeview">\n' +
                             '            <a href="#" class="nav-link active">\n' +
                             '              <i class="nav-icon fas fa-tachometer-alt"></i>\n' +
@@ -62,7 +62,8 @@ $(document).ready(function () {
     });
 });
 
-function reloadMainRight() {
-    alert('ok');
+function reloadMainRight(url) {
+    $("#context").empty();
+    $("#context").load(url);
 }
 

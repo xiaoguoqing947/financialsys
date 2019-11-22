@@ -1,5 +1,8 @@
 package cn.xgq.financialsys.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Income {
@@ -14,7 +17,8 @@ public class Income {
     private String payAccount;
 
     private Double incomePrice;
-
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy/MM/dd HH:mm:ss")
     private Date incomeDate;
 
     private String incomeUser;

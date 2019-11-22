@@ -194,4 +194,8 @@
     select power from user where username=#{un}
   </select>
 
+  <update id="updatePwdByUname">
+    update user set password = #{pw}
+    where username=#{un}
+  </update>
 </mapper>

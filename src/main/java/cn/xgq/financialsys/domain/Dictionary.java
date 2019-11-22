@@ -1,5 +1,9 @@
 package cn.xgq.financialsys.domain;
 
+import cn.xgq.financialsys.util.DicMap;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Dictionary {
@@ -14,7 +18,8 @@ public class Dictionary {
     private String keyName;
 
     private String remarks;
-
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy/MM/dd HH:mm:ss")
     private Date oprTime;
 
     public Integer getId() {
@@ -50,6 +55,10 @@ public class Dictionary {
     }
 
     public String getKeyName() {
+        if(keyName == null){
+            keyName = DicMap.getKeyName(dcisCode,keyValue);
+            System.out.println(keyName);
+        }
         return keyName;
     }
 

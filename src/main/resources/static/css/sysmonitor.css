@@ -1,0 +1,9 @@
+.loginPanel{
+	width:350px;
+	margin:0 auto;
+	text-align:center;
+	height: 300px;
+}
+ body{
+background: url("/img/user1.jpg") no-repeat;
+} 

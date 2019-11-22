@@ -4,6 +4,7 @@ import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.domain.dto.UserLoginForm;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 public interface UserSer {
     /**
@@ -21,4 +22,6 @@ public interface UserSer {
     boolean addUser(User user);
 
     int getUserPower(String username);
+
+    boolean updatePwd(UserLoginForm userLoginForm);
 }

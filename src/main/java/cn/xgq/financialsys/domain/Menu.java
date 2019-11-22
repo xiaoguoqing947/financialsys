@@ -1,12 +1,18 @@
 package cn.xgq.financialsys.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Menu {
     private Integer id;
-
+    @DateTimeFormat(pattern="yyyy年MM月dd日 HH时mm分ss秒")//页面写入数据库时格式化
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date createTime;
-
+    @DateTimeFormat(pattern="yyyy年MM月dd日 HH时mm分ss秒")//页面写入数据库时格式化
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date updateTime;
 
     private String icon;

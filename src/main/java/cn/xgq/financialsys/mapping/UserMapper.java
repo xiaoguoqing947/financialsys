@@ -24,4 +24,6 @@ public interface UserMapper {
 
     int queryUserPower(@Param("un") String username);
 
+    int updatePwdByUname(@Param("un") String username, @Param("pw") String password);
+
 }

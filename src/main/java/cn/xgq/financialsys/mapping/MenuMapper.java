@@ -1,6 +1,7 @@
 package cn.xgq.financialsys.mapping;
 
 import cn.xgq.financialsys.domain.Menu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -18,5 +19,9 @@ public interface MenuMapper {
 
     int updateByPrimaryKey(Menu record);
 
-    List<Map<String, Object>> findMenuList(Map<String, Object> searchMap);
+    List<Menu> findMenuList(Map<String, Object> searchMap);
+
+    int findMenuCount(Map<String, Object> searchMap);
+
+    int queryMenuByName(@Param("m_name") String name);
 }

@@ -114,4 +114,8 @@
       opr_time = #{oprTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAll" resultMap="BaseResultMap">
+    select * from dictionary where 1=1
+  </select>
 </mapper>

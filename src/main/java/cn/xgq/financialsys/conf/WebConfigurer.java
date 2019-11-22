@@ -17,6 +17,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/api/**").excludePathPatterns("/api/logout");
+        //关闭了拦截器，项目完成后开启
     }
 
     // 这个方法是用来配置静态资源的，比如html，js，css，等等

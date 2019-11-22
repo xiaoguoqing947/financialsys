@@ -9,6 +9,7 @@ import cn.xgq.financialsys.enums.MessageMeta;
 import cn.xgq.financialsys.service.UserSerImpl;
 import cn.xgq.financialsys.service.inter.UserSer;
 import cn.xgq.financialsys.util.Token;
+import cn.xgq.financialsys.util.ValidateMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -39,31 +40,31 @@ public class LoginCtrl {
 
     @ResponseBody
     @PostMapping("/login.action")
-    public Map<String,Object> doLogin(@RequestBody UserLoginForm form,HttpServletRequest request){
-        Map<String,Object> resultMap=new HashMap<String,Object>();
+    public Map<String, Object> doLogin(@RequestBody UserLoginForm form, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         boolean result = userSer.login(form);
         if (result) {
             userSer.addSession(request, form);
             resultMap.put("status", MessageMeta.sendSuccess.getMsg());
-            resultMap.put("power",userSer.getUserPower(form.getUsername()));
+            resultMap.put("power", userSer.getUserPower(form.getUsername()));
             String token = Token.getTokenString(request.getSession());
-            resultMap.put("token",token);
+            resultMap.put("token", token);
         } else {
-            resultMap.put("status",MessageMeta.sendError.getMsg());
+            resultMap.put("status", MessageMeta.sendError.getMsg());
         }
         return resultMap;
     }
 
     @ResponseBody
     @PostMapping("/api/unlock.action")
-    public boolean unLockSceen(@RequestBody UserLoginForm form){
-        boolean result=false;
-        try{
-           result = userSer.login(form);
-        }catch (Exception e){
+    public boolean unLockSceen(@RequestBody UserLoginForm form) {
+        boolean result = false;
+        try {
+            result = userSer.login(form);
+        } catch (Exception e) {
             LOGGER.error(e.toString());
         }
-       return result;
+        return result;
     }
 
     @GetMapping("/api/logout")
@@ -75,22 +76,47 @@ public class LoginCtrl {
 
     @ResponseBody
     @PostMapping("/register.action")
-    public Map<String,Object> doRegister(@RequestBody @Valid UserRegistForm form){
-        Map<String,Object> resultMap=new HashMap<String,Object>();
-        User user=new User();
-        BeanUtils.copyProperties(form,user);
-        if(userSer.addUser(user)){
-           resultMap.put("status",MessageMeta.sendSuccess.getMsg());
-        }else{
-            resultMap.put("status",MessageMeta.sendError.getMsg());
+    public Map<String, Object> doRegister(@RequestBody @Valid UserRegistForm form) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        User user = new User();
+        BeanUtils.copyProperties(form, user);
+        if (userSer.addUser(user)) {
+            resultMap.put("status", MessageMeta.sendSuccess.getMsg());
+        } else {
+            resultMap.put("status", MessageMeta.sendError.getMsg());
         }
         return resultMap;
     }
 
     @ResponseBody
     @PostMapping("/validateUname.action")
-    public boolean validateUname(@RequestParam String username){
-        boolean flag=userSer.validateUname(username);
+    public boolean validateUname(@RequestParam String username) {
+        boolean flag = userSer.validateUname(username);
         return flag;
     }
+
+    @ResponseBody
+    @PostMapping("/api/recoverPwd")
+    public Map<String,Object> recoverPwd(@RequestParam String pwd, HttpServletRequest request) {
+        Map<String,Object> resultMap=new HashMap<String ,Object>();
+        UserLoginForm userLoginForm = (UserLoginForm) request.getSession().getAttribute("admin");
+        userLoginForm.setPassword(pwd);
+        if(userSer.updatePwd(userLoginForm)){
+            resultMap.put("status","success");
+        }else{
+            resultMap.put("status","fail");
+        }
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/api/validPwd")
+    public boolean validPwd(@RequestParam String oldPwd, HttpServletRequest request) {
+//        System.out.println(oldPwd);
+        UserLoginForm userLoginForm = (UserLoginForm) request.getSession().getAttribute("admin");
+        userLoginForm.setPassword(oldPwd);
+        boolean flag=userSer.login(userLoginForm);
+        return flag;
+    }
+
 }
