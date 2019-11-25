@@ -2,6 +2,7 @@ package cn.xgq.financialsys.service.inter;
 
 import cn.xgq.financialsys.domain.Menu;
 import cn.xgq.financialsys.domain.dto.UpdateMenuForm;
+import cn.xgq.financialsys.domain.vo.VoMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -52,4 +53,10 @@ public interface MenuSer {
      * @return
      */
     boolean deleteMenu(String id);
+
+    /**
+     * 查找所有菜单的id和name
+     * @return
+     */
+    List<VoMenu> findAllMenuIdAndName();
 }

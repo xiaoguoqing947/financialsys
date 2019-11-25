@@ -1,6 +1,7 @@
 package cn.xgq.financialsys.mapping;
 
 import cn.xgq.financialsys.domain.Menu;
+import cn.xgq.financialsys.domain.vo.VoMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface MenuMapper {
     int findMenuCount(Map<String, Object> searchMap);
 
     int queryMenuByName(@Param("m_name") String name);
+
+    List<VoMenu> findMenuIdAndName();
 }

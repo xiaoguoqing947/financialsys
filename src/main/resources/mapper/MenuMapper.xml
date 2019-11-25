@@ -158,4 +158,8 @@
   <select id="queryMenuByName" resultType="int">
     select count(*) from menu where name=#{m_name}
   </select>
+  
+  <select id="findMenuIdAndName" resultType="cn.xgq.financialsys.domain.vo.VoMenu">
+        select id,name from menu where 1=1
+  </select>
 </mapper>

@@ -2,6 +2,7 @@ package cn.xgq.financialsys.service;
 
 import cn.xgq.financialsys.domain.Menu;
 import cn.xgq.financialsys.domain.dto.UpdateMenuForm;
+import cn.xgq.financialsys.domain.vo.VoMenu;
 import cn.xgq.financialsys.mapping.MenuMapper;
 import cn.xgq.financialsys.service.inter.MenuSer;
 import org.slf4j.Logger;
@@ -84,4 +85,11 @@ public class MenuSerImpl implements MenuSer {
         }
         return num > 0;
     }
+
+    @Override
+    public List<VoMenu> findAllMenuIdAndName() {
+        return menuMapper.findMenuIdAndName();
+    }
+
+
 }

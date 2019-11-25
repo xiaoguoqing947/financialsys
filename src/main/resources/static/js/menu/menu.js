@@ -44,9 +44,9 @@ $(document).ready(function () {
                             result.data[i].priority = '';
                         } else {
                             result.data[i].parentId = '';
-                            for (var j = 0; j < result.data.length; j++) {
-                                if (result.data[i].priority == result.data[j].id) {
-                                    result.data[i].priority = result.data[j].name;
+                            for (var j = 0; j < result.menus.length; j++) {
+                                if (result.data[i].priority == result.menus[j].id) {
+                                    result.data[i].priority = result.menus[j].name;
                                 }
                             }
                         }

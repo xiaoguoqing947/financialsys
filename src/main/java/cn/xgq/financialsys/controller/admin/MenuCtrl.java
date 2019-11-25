@@ -4,6 +4,7 @@ import cn.xgq.financialsys.domain.Menu;
 import cn.xgq.financialsys.domain.dto.AddMenuForm;
 import cn.xgq.financialsys.domain.dto.SearchMenuForm;
 import cn.xgq.financialsys.domain.dto.UpdateMenuForm;
+import cn.xgq.financialsys.domain.vo.VoMenu;
 import cn.xgq.financialsys.service.inter.MenuSer;
 import cn.xgq.financialsys.util.ValidateMethod;
 import org.springframework.beans.BeanUtils;
@@ -64,14 +65,16 @@ public class MenuCtrl {
             resultMap.put("pager", resultPagerMap);
             if (totalCount > 0) {
                 menuList = menuSer.listMenu(searchMap);
+                List<VoMenu> menus=menuSer.findAllMenuIdAndName();
                 resultMap.put("data", menuList);
+                resultMap.put("menus", menus);
             }else{
                 resultMap.put("message", "查无数据");
             }
         } else {
             resultMap.put("message", "请上传参数");
         }
-        System.out.println(menuList);
+//        System.out.println(menuList);
         return resultMap;
     }
 
