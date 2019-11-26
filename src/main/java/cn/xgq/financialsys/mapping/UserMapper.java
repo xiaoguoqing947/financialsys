@@ -3,6 +3,9 @@ package cn.xgq.financialsys.mapping;
 import cn.xgq.financialsys.domain.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserMapper {
     int deleteByPrimaryKey(String username);
 
@@ -26,4 +29,9 @@ public interface UserMapper {
 
     int updatePwdByUname(@Param("un") String username, @Param("pw") String password);
 
+    int findUserCount(Map<String, Object> searchMap);
+
+    List<User> findUserList(Map<String, Object> searchMap);
+
+    int deleteUserByUsername(@Param("un") String username);
 }

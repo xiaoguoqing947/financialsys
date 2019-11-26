@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DicSerImpl implements DicSer {
@@ -16,7 +17,7 @@ public class DicSerImpl implements DicSer {
     private DictionaryMapper dictionaryMapper;
 
     @Override
-    public List<Dictionary> queryAll() {
-        return dictionaryMapper.queryAll();
+    public List<Dictionary> queryAll(Map<String,Object> searchMap) {
+        return dictionaryMapper.queryAll(searchMap);
     }
 }

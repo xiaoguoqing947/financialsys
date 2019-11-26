@@ -3,13 +3,12 @@ package cn.xgq.financialsys.controller;
 
 import cn.xgq.financialsys.annotation.SystemControllerLog;
 import cn.xgq.financialsys.domain.User;
-import cn.xgq.financialsys.domain.dto.UserLoginForm;
-import cn.xgq.financialsys.domain.dto.UserRegistForm;
+import cn.xgq.financialsys.domain.dto.user.UserLoginForm;
+import cn.xgq.financialsys.domain.dto.user.UserRegistForm;
 import cn.xgq.financialsys.enums.MessageMeta;
 import cn.xgq.financialsys.service.UserSerImpl;
 import cn.xgq.financialsys.service.inter.UserSer;
 import cn.xgq.financialsys.util.Token;
-import cn.xgq.financialsys.util.ValidateMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -44,9 +43,10 @@ public class LoginCtrl {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         boolean result = userSer.login(form);
         if (result) {
-            userSer.addSession(request, form);
             resultMap.put("status", MessageMeta.sendSuccess.getMsg());
-            resultMap.put("power", userSer.getUserPower(form.getUsername()));
+            User user=userSer.findUser(form.getUsername());
+            userSer.addSession(request, user);
+            resultMap.put("power", user.getPower());
             String token = Token.getTokenString(request.getSession());
             resultMap.put("token", token);
         } else {

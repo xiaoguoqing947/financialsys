@@ -1,9 +1,8 @@
 package cn.xgq.financialsys.service.inter;
 
 import cn.xgq.financialsys.domain.Menu;
-import cn.xgq.financialsys.domain.dto.UpdateMenuForm;
+import cn.xgq.financialsys.domain.dto.menu.UpdateMenuForm;
 import cn.xgq.financialsys.domain.vo.VoMenu;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;

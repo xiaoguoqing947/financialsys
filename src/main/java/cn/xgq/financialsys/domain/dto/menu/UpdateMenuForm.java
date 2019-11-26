@@ -1,4 +1,4 @@
-package cn.xgq.financialsys.domain.dto;
+package cn.xgq.financialsys.domain.dto.menu;
 
 import lombok.*;
 

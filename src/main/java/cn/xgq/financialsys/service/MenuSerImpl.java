@@ -1,13 +1,12 @@
 package cn.xgq.financialsys.service;
 
 import cn.xgq.financialsys.domain.Menu;
-import cn.xgq.financialsys.domain.dto.UpdateMenuForm;
+import cn.xgq.financialsys.domain.dto.menu.UpdateMenuForm;
 import cn.xgq.financialsys.domain.vo.VoMenu;
 import cn.xgq.financialsys.mapping.MenuMapper;
 import cn.xgq.financialsys.service.inter.MenuSer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

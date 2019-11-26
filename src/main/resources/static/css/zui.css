@@ -2631,9 +2631,9 @@ input[type="button"].btn-block {
        -o-transition: all .2s ease-in-out;
           transition: all .2s ease-in-out;
   }
-.img-circle {
+/*.img-circle {
   border-radius: 50%;
-  }
+  }*/
 hr {
   margin-top: 20px;
   margin-bottom: 20px;

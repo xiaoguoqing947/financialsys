@@ -117,5 +117,8 @@
 
   <select id="queryAll" resultMap="BaseResultMap">
     select * from dictionary where 1=1
+    <if test="dcis_code != null">
+     and dcis_code = #{dcis_code}
+    </if>
   </select>
 </mapper>

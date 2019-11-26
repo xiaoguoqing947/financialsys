@@ -2,18 +2,12 @@ package cn.xgq.financialsys.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
+@Data
 public class User{
     private  int power;
 
@@ -34,9 +28,11 @@ public class User{
     private String email;
 
     private String address;
+
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")//页面写入数据库时格式化
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy/MM/dd HH:mm:ss")
-    private Date registDate;
+    private Date registData;
+
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")//页面写入数据库时格式化
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy/MM/dd HH:mm:ss")
     private Date oprDate;

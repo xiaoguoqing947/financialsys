@@ -1,6 +1,6 @@
 package cn.xgq.financialsys.conf.intercepors;
 
-import cn.xgq.financialsys.domain.dto.UserLoginForm;
+import cn.xgq.financialsys.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        UserLoginForm user = (UserLoginForm) session.getAttribute("admin");
+        User user = (User) session.getAttribute("admin");
         if (user == null) {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().append("<script>alert('请登录后重试!');location.href='/';</script>");

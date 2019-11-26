@@ -55,4 +55,8 @@
     set income_type = #{incomeType,jdbcType=VARCHAR}
     where income_type_id = #{incomeTypeId,jdbcType=INTEGER}
   </update>
+
+  <select id="findList" resultMap="BaseResultMap">
+    select * from incometype where 1=1
+  </select>
 </mapper>

@@ -1,0 +1,110 @@
+<div class="panel">
+    <div class="panel-heading">
+        收入查询
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">收入金额</span>
+                    <input type="text" id="queryMinPrice" name="queryMinPrice" placeholder="金额最小值">￥
+                    <strong>-</strong>&nbsp;&nbsp;
+                    <input type="text" id="queryMaxPrice" name="queryMaxPrice" placeholder="金额最大值">￥
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">收入类别</span>
+                    <select id="queryIncomeType" name="queryIncomeType" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-success" type="button" id="searchBtn"><i class="fa fa-search"
+                                                                                aria-hidden="true"></i>搜索
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="datagrid">
+    <div class="search-box">
+        <button class="btn btn-success " type="button"
+                data-toggle="modal" data-target="#addModal" id="addBtn"><i class="fa fa-plus" aria-hidden="true"></i>记账
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info " type="button" id="updateBtn"><i class="fa fa-edit"></i>修改</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger " type="button" id="deleteBtn"><i class="fa fa-trash"></i>删除</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn " type="button" id="detailBtn"><i class="fa fa-info"></i>详情</button>
+    </div>
+    <div class="datagrid datagrid-striped" id="listDataGrid" data-ride="datagrid"></div>
+    <div id="listPager" class="pager" data-ride="pager"></div>
+</div>
+<!-- 添加页面 -->
+<div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">收入记账</h4>
+            </div>
+            <form id="addForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="incomeTypeId" class="col-sm-3 control-label">收入类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="incomeTypeId" name="incomeTypeId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomePrice" class="col-sm-3 control-label">收入金额:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="incomePrice" name="incomePrice" type="text">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payMethod" class="col-sm-3 control-label">收款方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="payMethod" name="payMethod">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeSource" class="col-sm-3 control-label">收入来源:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="incomeSource" name="incomeSource" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payAccount" class="col-sm-3 control-label">收入账户:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="payAccount" name="payAccount" type="text">
+                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeDesc" class="col-sm-3 control-label">收入描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="incomeDesc" name="incomeDesc" rows="6" cols="60"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="addSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/messages_zh.js"></script>
+<script type="text/javascript" src="/js/income/income.js"></script>

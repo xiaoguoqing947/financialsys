@@ -23,7 +23,7 @@ $(document).ready(function () {
                     if (result.menuList[i].parentId == 0) {
                         html+='<li class="nav-item has-treeview">\n' +
                             '            <a href="#" class="nav-link active">\n' +
-                            '              <i class="nav-icon fas fa-tachometer-alt"></i>\n' +
+                            '              <i class="nav-icon fas '+result.menuList[i].icon+'"></i>\n' +
                             '              <p>';
                         html+='<p>'+result.menuList[i].name+'</p>';
                         html+='<i class="right fas fa-angle-left"></i>\n' +
@@ -32,7 +32,7 @@ $(document).ready(function () {
                         for (var j = 0; j < result.menuList.length; j++) {
                             if(result.menuList[j].priority == result.menuList[i].id){
                                 html+='<ul class="nav nav-treeview">\n' +
-                                    '              <li class="nav-item" a href="javascript:void(0)" onclick="reloadMainRight()">\n' +
+                                    '              <li class="nav-item" a href="javascript:void(0)" onclick="reloadMainRight('+result.menuList[j].url+')">\n' +
                                     '                <a href="#" class="nav-link active">\n' +
                                     '                  <i class="far fa-circle nav-icon"></i>';
                                 html+='<p>'+result.menuList[j].name+'</p>';

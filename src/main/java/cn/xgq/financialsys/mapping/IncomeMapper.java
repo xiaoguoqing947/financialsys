@@ -2,6 +2,9 @@ package cn.xgq.financialsys.mapping;
 
 import cn.xgq.financialsys.domain.Income;
 
+import java.util.List;
+import java.util.Map;
+
 public interface IncomeMapper {
     int deleteByPrimaryKey(Integer incomeId);
 
@@ -14,4 +17,10 @@ public interface IncomeMapper {
     int updateByPrimaryKeySelective(Income record);
 
     int updateByPrimaryKey(Income record);
+
+    int findIncomeCount(Map<String, Object> searchMap);
+
+    List<Income> findIncomeList(Map<String, Object> searchMap);
+
+    List<Map<String,Object>> findIncomeMap(Map<String, Object> searchMap);
 }

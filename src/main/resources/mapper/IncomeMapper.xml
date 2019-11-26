@@ -13,8 +13,8 @@
     <result column="income_desc" jdbcType="VARCHAR" property="incomeDesc" />
   </resultMap>
   <sql id="Base_Column_List">
-    income_id, income_type_id, income_source, pay_method, pay_account, income_price, 
-    income_date, income_user, income_desc
+    income_id, a.income_type_id, income_source, pay_method, pay_account, income_price,
+    income_user, income_desc
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -139,4 +139,48 @@
       income_desc = #{incomeDesc,jdbcType=VARCHAR}
     where income_id = #{incomeId,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findIncomeCount" parameterType="java.util.Map" resultType="int">
+    select count(*)
+    from income a right join incometype b on a.income_id=b.income_type_id
+    RIGHT JOIN dictionary d on d.dcis_code='pay_method' and d.key_value=a.pay_method
+    <where>
+      <if test="minPrice != null">
+        <if test="maxPrice != null">
+          a.income_price &lt; #{maxPrice} and a.income_price &gt;  #{minPrice}
+        </if>
+      </if>
+      <if test="incomeType !=null">
+        and a.income_type_id = #{incomeType}
+      </if>
+      <if test="incomeUser !=null">
+        and a.income_user = #{incomeUser}
+      </if>
+    </where>
+  </select>
+
+  <select id="findIncomeMap" parameterType="java.util.Map" resultType="java.util.HashMap">
+    select <include refid="Base_Column_List" />,b.income_type,d.key_name, DATE_FORMAT(a.income_date,'%Y-%m-%d %H:%i:%s') as income_date
+    from income a right join incometype b on a.income_type_id=b.income_type_id
+    RIGHT JOIN dictionary d on d.dcis_code='pay_method' and d.key_value=a.pay_method
+    <where>
+      <if test="minPrice != null">
+        <if test="maxPrice != null">
+          a.income_price &lt; #{maxPrice} and income_price &gt;  #{minPrice}
+        </if>
+      </if>
+      <if test="incomeType !=null">
+        and a.income_type_id = #{incomeType}
+      </if>
+      <if test="incomeUser !=null">
+        and a.income_user = #{incomeUser}
+      </if>
+    </where>
+    <if test="pageSize != null">
+      <if test="currentPage != null">
+        limit #{indexCount},#{pageSize}
+      </if>
+    </if>
+  </select>
 </mapper>

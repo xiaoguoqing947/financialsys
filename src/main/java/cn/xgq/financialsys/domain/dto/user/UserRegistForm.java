@@ -1,4 +1,4 @@
-package cn.xgq.financialsys.domain.dto;
+package cn.xgq.financialsys.domain.dto.user;
 
 import com.mysql.cj.protocol.x.XMessage;
 import lombok.*;

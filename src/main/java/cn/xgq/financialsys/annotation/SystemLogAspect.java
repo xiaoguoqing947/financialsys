@@ -1,7 +1,7 @@
 package cn.xgq.financialsys.annotation;
 
 import cn.xgq.financialsys.domain.Log;
-import cn.xgq.financialsys.domain.dto.UserLoginForm;
+import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.service.inter.LogSer;
 import cn.xgq.financialsys.util.IpUtils;
 import cn.xgq.financialsys.util.JsonUtils;
@@ -47,7 +47,7 @@ public class SystemLogAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         //读取session中的用户
-        UserLoginForm user = (UserLoginForm) session.getAttribute("admin");
+        User user = (User) session.getAttribute("admin");
 
         String ip = IpUtils.getIpAddr(request);
 
@@ -109,7 +109,7 @@ public class SystemLogAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         //读取session中的用户
-        UserLoginForm user = (UserLoginForm) session.getAttribute("admin");
+        User user = (User) session.getAttribute("admin");
         //获取请求ip
         String ip = IpUtils.getIpAddr(request);
         //获取用户请求方法的参数并序列化为JSON格式字符串

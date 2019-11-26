@@ -1,18 +1,18 @@
 package cn.xgq.financialsys.service;
 
 import cn.xgq.financialsys.domain.User;
-import cn.xgq.financialsys.domain.dto.UserLoginForm;
+import cn.xgq.financialsys.domain.dto.user.UserLoginForm;
 import cn.xgq.financialsys.mapping.UserMapper;
 import cn.xgq.financialsys.service.inter.UserSer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserSerImpl implements UserSer {
@@ -32,9 +32,9 @@ public class UserSerImpl implements UserSer {
     }
 
     @Override
-    public void addSession(HttpServletRequest request, UserLoginForm form) {
+    public void addSession(HttpServletRequest request, User user) {
         HttpSession session = request.getSession(true);
-        session.setAttribute("admin", form);
+        session.setAttribute("admin", user);
         session.setMaxInactiveInterval(1800);
     }
 
@@ -51,7 +51,7 @@ public class UserSerImpl implements UserSer {
         //对象不存在返回true
         try {
             user = userMapper.queryUserByUsername(username);
-            System.out.println(user.toString());
+//            System.out.println(user.toString());
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
@@ -83,5 +83,31 @@ public class UserSerImpl implements UserSer {
             LOGGER.error(e.getMessage());
         }
         return num > 0;
+    }
+
+    @Override
+    public int findCount(Map<String, Object> searchMap) {
+        return userMapper.findUserCount(searchMap);
+    }
+
+    @Override
+    public List<User> findList(Map<String, Object> searchMap) {
+        return userMapper.findUserList(searchMap);
+    }
+
+    @Override
+    public boolean deleteUser(String username) {
+        int num = 0;
+        try {
+            num = userMapper.deleteUserByUsername(username);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return num > 0;
+    }
+
+    @Override
+    public User findUser(String username) {
+        return userMapper.queryUserByUsername(username);
     }
 }

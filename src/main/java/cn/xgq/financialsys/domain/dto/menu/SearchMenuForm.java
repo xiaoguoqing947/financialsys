@@ -1,4 +1,4 @@
-package cn.xgq.financialsys.domain.dto;
+package cn.xgq.financialsys.domain.dto.menu;
 
 import lombok.*;
 
@@ -9,9 +9,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class SearchMenuForm {
 
-    @NotNull
     private String menuCode;//这边支持用户名/邮箱/手机号登录 需要判断下
-    @NotNull
     private String menuNameLike;
     @NotNull
     private String pageSize;

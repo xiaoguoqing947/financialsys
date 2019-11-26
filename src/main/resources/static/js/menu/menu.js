@@ -37,7 +37,7 @@ $(document).ready(function () {
             },
             data: JSON.stringify(menuForm),//转化为json字符串
             success: function (result) {
-                if (result.result == 'success') {
+                if (result.result == 'success')     {
                     for (var i = 0; i < result.data.length; i++) {
                         if (result.data[i].parentId == '0') {
                             result.data[i].parentId = '是';
@@ -330,6 +330,7 @@ $(document).ready(function () {
             }
         });
     });
+    /*删除按钮*/
     $("#deleteBtn").click(function(){
         // 获取数据表格实例
         var listDataGrid = $('#listDataGrid').data('zui.datagrid');

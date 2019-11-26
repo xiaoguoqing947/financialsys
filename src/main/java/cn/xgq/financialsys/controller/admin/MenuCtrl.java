@@ -1,9 +1,9 @@
 package cn.xgq.financialsys.controller.admin;
 
 import cn.xgq.financialsys.domain.Menu;
-import cn.xgq.financialsys.domain.dto.AddMenuForm;
-import cn.xgq.financialsys.domain.dto.SearchMenuForm;
-import cn.xgq.financialsys.domain.dto.UpdateMenuForm;
+import cn.xgq.financialsys.domain.dto.menu.AddMenuForm;
+import cn.xgq.financialsys.domain.dto.menu.SearchMenuForm;
+import cn.xgq.financialsys.domain.dto.menu.UpdateMenuForm;
 import cn.xgq.financialsys.domain.vo.VoMenu;
 import cn.xgq.financialsys.service.inter.MenuSer;
 import cn.xgq.financialsys.util.ValidateMethod;
@@ -102,7 +102,7 @@ public class MenuCtrl {
         BeanUtils.copyProperties(form,menu);
         menu.setCreateTime(new Date());
         menu.setUpdateTime(new Date());
-        menu.setIcon("/img/user5.jpg");
+        menu.setIcon("fa-wrench");
         boolean flag=menuSer.addMenu(menu);
         return flag;
     }

@@ -32,7 +32,8 @@ $("#recoverForm").validate({
             "data": {"pwd": pwd},
             "success":function(data){
                 if (data.status == 'success') {
-                    alert('修改成功')
+                    alert('修改成功');
+                    // location.href='/api/sysadmin';
                 } else if (data.status == 'fail') {
                     alert('修改失败')
                 }
@@ -68,4 +69,8 @@ $("#recoverForm").validate({
             equalTo: "<span style='color: red'>*</span>两次密码输入不一致<span style='color: red'>*</span>"
         }
     }
+});
+
+$('#reback').click(function () {
+    location.href='/api/sysadmin';
 });

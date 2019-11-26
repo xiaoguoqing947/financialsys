@@ -1,10 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <div>欢迎来到用户界面</div>
-</body>
-</html>
+<div class="panel">
+    <div class="panel-heading">
+        查询用户
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">姓名</span>
+                    <input type="text" id="queryUserCode" name="queryUserCode" class="form-control" placeholder="">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon">用户名</span>
+                    <input type="text" id="queryUserName" name="queryUserName" class="form-control"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-success" type="button" id="searchBtn"><i class="fa fa-search"
+                                                                                aria-hidden="true"></i>搜索
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="datagrid">
+    <div class="search-box">
+        <button class="btn btn-danger " type="button" id="deleteBtn"><i class="fa fa-trash"></i>删除</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn " type="button" id="detailBtn"><i class="fa fa-info"></i>详情</button>
+    </div>
+    <div class="datagrid datagrid-striped" id="listDataGrid" data-ride="datagrid"></div>
+    <div id="listPager" class="pager" data-ride="pager"></div>
+</div>
+<!-- 删除确认 -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                <h4 class="modal-title">删除用户</h4>
+            </div>
+            <div class="modal-body text-center">
+                <H3>删除用户前请与该用户确认，否则就撤销删除！</H3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">撤销</button>
+                <button type="button" class="btn btn-primary" id="deleteMenuBtn">已确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情界面-->
+<div class="modal fade" id="detailModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">用户详情</h4>
+            </div>
+            <form id="detailForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="detailHeadPic" class="col-sm-3 control-label">用户头像:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailHeadPic"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailUName" class="col-sm-3 control-label">用户名:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailUName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailName" class="col-sm-3 control-label">姓名:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailSex" class="col-sm-3 control-label">姓别:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailSex"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailRTime" class="col-sm-3 control-label">注册时间:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailRTime"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailEmail" class="col-sm-3 control-label">邮箱:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailEmail"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailPNumber" class="col-sm-3 control-label">联系电话:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailPNumber"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailBorn" class="col-sm-3 control-label">出生日期:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailBorn"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailPower" class="col-sm-3 control-label">用户权限级别:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailPower"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detailAddress" class="col-sm-3 control-label">家庭地址:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="detailAddress"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/messages_zh.js"></script>
+<script type="text/javascript" src="/js/user/user.js"></script>

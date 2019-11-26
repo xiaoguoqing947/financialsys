@@ -71,10 +71,10 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="/img/user2.jpg " class="img-circle elevation-2" alt="User Image">
+                    <img th:src="${session.admin.pic} " data-toggle="lightbox" class="img-circle" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="/api/admin" class="d-block">XIAO GUO QING</a>
+                    <a href="/api/admin" class="d-block"><h1 th:text="${session.admin.name}"></h1></a>
                 </div>
             </div>
 

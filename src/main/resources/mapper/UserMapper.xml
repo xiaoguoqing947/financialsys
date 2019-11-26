@@ -198,4 +198,38 @@
     update user set password = #{pw}
     where username=#{un}
   </update>
+
+  <select id="findUserList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from user
+    <where>
+      <if test="u_code !=null">
+        name like '%${u_code}%'
+      </if>
+      <if test="u_name !=null">
+        and username like '%${u_name}%'
+      </if>
+    </where>
+    <if test="pageSize != null">
+      <if test="currentPage != null">
+        limit #{indexCount},#{pageSize}
+      </if>
+    </if>
+  </select>
+
+  <select id="findUserCount" parameterType="java.util.Map" resultType="int">
+    select count(*) from user
+    <where>
+      <if test="u_code !=null">
+        name like '%${u_code}%'
+      </if>
+      <if test="u_name !=null">
+        and username like '%${u_name}%'
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteUserByUsername">
+    delete from user where username =#{un}
+  </delete>
+
 </mapper>

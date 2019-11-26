@@ -1,4 +1,4 @@
-package cn.xgq.financialsys.domain.dto;
+package cn.xgq.financialsys.domain.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
