@@ -6,3 +6,9 @@ function reloadMainRight(url) {
     $("#context").empty();
     $("#context").load(url);
 }
+
+window.onload=function(){
+//要初始化的东西
+    $("#context").empty();
+    $("#context").load('/syspages/syscontext.html');
+}

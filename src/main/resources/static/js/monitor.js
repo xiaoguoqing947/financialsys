@@ -2,7 +2,11 @@ function loginout() {
     $.zui.store.clear(); // 清空所有本地存储的条目
     location.href = "/api/logout";
 }
-
+window.onload=function(){
+//要初始化的东西
+    $("#context").empty();
+    $("#context").load('/pages/usercontext.html');
+}
 $(document).ready(function () {
     var token = $.zui.store.get("token");
     $.ajax({

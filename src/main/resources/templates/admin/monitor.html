@@ -27,7 +27,7 @@
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="/api/admin" class="nav-link">Home</a>
+                <a href="javascript:void(0)" onclick="reloadMainRight('/pages/usercontext.html')" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
@@ -74,7 +74,7 @@
                     <img th:src="${session.admin.pic} " data-toggle="lightbox" class="img-circle" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="/api/admin" class="d-block"><h1 th:text="${session.admin.name}"></h1></a>
+                    <a href="javascript:void(0)" onclick="reloadMainRight('/pages/usercontext.html')" class="d-block"><h1 th:text="${session.admin.name}"></h1></a>
                 </div>
             </div>
 
@@ -93,7 +93,6 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <div id="context">
-            <div th:replace="/admin/admin_msg :: context"></div>
         </div>
     </div>
     <!-- /.content-wrapper -->
