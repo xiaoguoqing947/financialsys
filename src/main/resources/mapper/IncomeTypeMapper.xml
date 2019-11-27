@@ -59,4 +59,8 @@
   <select id="findList" resultMap="BaseResultMap">
     select * from incometype where 1=1
   </select>
+
+  <select id="queryIncTypeByName" resultType="int">
+    select count(*) from incometype where income_type=#{name}
+  </select>
 </mapper>

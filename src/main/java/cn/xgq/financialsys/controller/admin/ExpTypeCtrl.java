@@ -1,12 +1,11 @@
 package cn.xgq.financialsys.controller.admin;
 
-import cn.xgq.financialsys.domain.IncomeType;
-import cn.xgq.financialsys.domain.dto.income.UpdateIncTypeForm;
-import cn.xgq.financialsys.service.inter.IncomeTypeSer;
+import cn.xgq.financialsys.domain.ExpendType;
+import cn.xgq.financialsys.domain.dto.expend.UpdateExpTypeForm;
+import cn.xgq.financialsys.service.inter.ExpendTypeSer;
 import cn.xgq.financialsys.util.ValidateMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,47 +14,46 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/api/incometype")
-public class IncTypeCtrl {
-
+@RequestMapping(value = "/api/expendtype")
+public class ExpTypeCtrl {
     @Autowired
-    private IncomeTypeSer incomeTypeSer;
+    private ExpendTypeSer expendTypeSer;
 
     @ResponseBody
     @PostMapping("/queryListUrl")
     public Map<String, Object> queryListUrl(HttpServletRequest req) {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (ValidateMethod.isTokenCheck(req)) {
-            List<IncomeType> incTypeList = incomeTypeSer.listIncomeType();
-            resultMap.put("data", incTypeList);
+            List<ExpendType> expendTypeList = expendTypeSer.listExpendType();
+            resultMap.put("data", expendTypeList);
             resultMap.put("status", "success");
-            System.out.println(incTypeList);
+            System.out.println(expendTypeList);
         }
         return resultMap;
     }
 
     @ResponseBody
-    @GetMapping("/validIncTypeName")
-    public boolean validIncTypeName(@RequestParam("incomeType") String incomeType){
-        boolean flag=incomeTypeSer.validIncTypeName(incomeType);
+    @GetMapping("/validExpTypeName")
+    public boolean validIncTypeName(@RequestParam("enpendType") String enpendType){
+        boolean flag=expendTypeSer.validIncTypeName(enpendType);
         return !flag;
     }
 
     @ResponseBody
     @PostMapping("/add")
-    public boolean addIncomeType(IncomeType incomeType,HttpServletRequest req){
-        boolean flag=incomeTypeSer.addIncType(incomeType);
+    public boolean addIncomeType(ExpendType expendType,HttpServletRequest req){
+        boolean flag=expendTypeSer.addExpType(expendType);
         return flag;
     }
 
     @ResponseBody
     @PostMapping("/initUpdate")
-    public Map<String,Object> initUpdate(@RequestParam("incomeTypeId") String incomeTypeId,HttpServletRequest request){
+    public Map<String,Object> initUpdate(@RequestParam("expendTypeId") String expendTypeId,HttpServletRequest request){
         Map<String,Object> resultMap=new HashMap<String, Object>();
         if(ValidateMethod.isTokenCheck(request)){
-            IncomeType incomeType=incomeTypeSer.findIncomeType(incomeTypeId);
+            ExpendType expendType=expendTypeSer.findExpendType(expendTypeId);
             resultMap.put("result","success");
-            resultMap.put("incomeType",incomeType);
+            resultMap.put("expendType",expendType);
         }else {
             resultMap.put("result","fail");
         }
@@ -64,19 +62,19 @@ public class IncTypeCtrl {
 
     @ResponseBody
     @GetMapping("/validUpdateName")
-    public boolean validUpdateName(@RequestParam("updateIncType") String updateIncType,@RequestParam("oldIncType") String oldIncType){
-        if(updateIncType.equals(oldIncType)){
+    public boolean validUpdateName(@RequestParam("updateExpType") String updateExpType,@RequestParam("oldExpType") String oldExpType){
+        if(updateExpType.equals(oldExpType)){
             return true;
         }else{
-            return !(incomeTypeSer.validIncTypeName(updateIncType));
+            return !(expendTypeSer.validIncTypeName(updateExpType));
         }
     }
 
     @ResponseBody
     @PostMapping("/update")
-    public Map<String,Object> updateIncType(UpdateIncTypeForm form, HttpServletRequest request){
+    public Map<String,Object> updateIncType(UpdateExpTypeForm form, HttpServletRequest request){
         Map<String,Object> resultMap=new HashMap<String, Object>();
-        if(ValidateMethod.isTokenCheck(request) && incomeTypeSer.updateIncType(form)){
+        if(ValidateMethod.isTokenCheck(request) && expendTypeSer.updateExpType(form)){
             resultMap.put("success","1");
         }else{
             resultMap.put("success","0");
@@ -86,9 +84,9 @@ public class IncTypeCtrl {
 
     @ResponseBody
     @PostMapping("/delete")
-    public Map<String,Object> deleteMenu(@RequestParam("incomeTypeId") String id,HttpServletRequest request){
+    public Map<String,Object> deleteMenu(@RequestParam("expendTypeId") String id,HttpServletRequest request){
         Map<String,Object> resultMap=new HashMap<String, Object>();
-        if(ValidateMethod.isTokenCheck(request) && incomeTypeSer.deleteIncType(id)){
+        if(ValidateMethod.isTokenCheck(request) && expendTypeSer.deleteExpType(id)){
             resultMap.put("success","1");
         }else{
             resultMap.put("success","0");

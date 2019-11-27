@@ -1,0 +1,108 @@
+<div class="panel">
+    <div class="panel-heading">
+        <a href="#collapseExample" data-toggle="collapse" class="btn btn-link">支出类别管理</a>
+    </div>
+    <div class="panel-body collapse" id="collapseExample">
+        <div class="bg-primary with-padding">
+            <span class="label label-danger">定义：</span>
+            支出（payment），企业在生产经营过程中为获得另一项资产、为清偿债务所发生的资产的流出。如企业为购买材料、
+            办公用品等支付或预付的款项；为偿还银行借款、应付账款及支付账款或支付股利所发生的资产的流出；为购置固定
+            资产、支付长期工程费用所发生的支出和生活中的消费支出。
+        </div>
+    </div>
+</div>
+<div class="datagrid">
+    <div class="search-box">
+        <button class="btn btn-success " type="button"
+                data-toggle="modal" data-target="#addModal" id="addBtn"><i class="fa fa-plus" aria-hidden="true"></i>添加
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info " type="button" id="updateBtn"><i class="fa fa-edit"></i>修改</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger " type="button" id="deleteBtn"><i class="fa fa-trash"></i>删除</button>
+    </div>
+    <div class="datagrid datagrid-striped" id="listDataGrid" data-ride="datagrid"></div>
+    <div id="listPager" class="pager" data-ride="pager"></div>
+</div>
+<!-- 添加页面 -->
+<div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">支出记账</h4>
+            </div>
+            <form id="addForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="enpendType" class="col-sm-3 control-label">支出类别名称:<font
+                                    color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="enpendType" name="enpendType" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="addSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--修改界面-->
+<div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">修改支出类别</h4>
+            </div>
+            <form id="updateForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="updateExpType" class="col-sm-3 control-label">支出类别名称:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="updateExpType" name="updateExpType" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <input type="hidden" name="updateExpTypeId" id="updateExpTypeId"/>
+                        <input type="hidden" name="oldExpType" id="oldExpType"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="updateSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 删除确认 -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                <h4 class="modal-title">删除支出类别</h4>
+            </div>
+            <div class="modal-body text-center">
+                <H3>您确定要删除此支出类别吗?</H3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="deleteMenuBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/messages_zh.js"></script>
+<script type="text/javascript" src="/js/expend/expendtype.js"></script>

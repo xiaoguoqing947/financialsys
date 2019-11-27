@@ -1,6 +1,9 @@
 package cn.xgq.financialsys.mapping;
 
 import cn.xgq.financialsys.domain.ExpendType;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ExpendTypeMapper {
     int deleteByPrimaryKey(Integer expendTypeId);
@@ -14,4 +17,8 @@ public interface ExpendTypeMapper {
     int updateByPrimaryKeySelective(ExpendType record);
 
     int updateByPrimaryKey(ExpendType record);
+
+    List<ExpendType> findList();
+
+    int queryExpTypeByName(@Param("name") String enpendType);
 }

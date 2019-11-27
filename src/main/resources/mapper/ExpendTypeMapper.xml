@@ -55,4 +55,12 @@
     set enpend_type = #{enpendType,jdbcType=VARCHAR}
     where expend_type_id = #{expendTypeId,jdbcType=INTEGER}
   </update>
+
+  <select id="findList" resultMap="BaseResultMap">
+    select * from expendtype where 1=1
+  </select>
+
+  <select id="queryExpTypeByName" resultType="int">
+    select count(*) from expendtype where enpend_type=#{name}
+  </select>
 </mapper>

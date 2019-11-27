@@ -1,0 +1,110 @@
+<div class="panel">
+    <div class="panel-heading">
+        <a href="#collapseExample" data-toggle="collapse" class="btn btn-link">收入类别管理</a>
+    </div>
+    <div class="panel-body collapse" id="collapseExample">
+        <div class="bg-primary with-padding">
+            <span class="label label-danger">定义：</span>收入分类是收入要素指的是企业的营业收入。它可分为两个部分，即基本业务收入和其他业务收入。企业产品或商品的销售都是其基本的、
+            主要的经济活动，这种由于企业的基本营业活动所取得的营业收入称为基本业务收入，基本业务收入是企业经营活动的主要来源，在企业的
+            营业收入中占有较大的比重，直接影响着企业的经济效益。基本业务收入的范围随着企业的性质而不同。在工业企业，基本业务收入即产品
+            销售收入，包括产成品、自制半成品、工业性劳务等发生的收入；商品流通企业基本业务收入指商品的销售收入，包括自购自销商品的销售
+            收入，接受其他单位委托代销商品的销售收入以及代购代销手续费收入；施工企业基本业务收入指承包工程实现的工程价款结算收入，向发包
+            单位收取的各种索赔款等。
+        </div>
+    </div>
+</div>
+<div class="datagrid">
+    <div class="search-box">
+        <button class="btn btn-success " type="button"
+                data-toggle="modal" data-target="#addModal" id="addBtn"><i class="fa fa-plus" aria-hidden="true"></i>添加
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info " type="button" id="updateBtn"><i class="fa fa-edit"></i>修改</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger " type="button" id="deleteBtn"><i class="fa fa-trash"></i>删除</button>
+    </div>
+    <div class="datagrid datagrid-striped" id="listDataGrid" data-ride="datagrid"></div>
+    <div id="listPager" class="pager" data-ride="pager"></div>
+</div>
+<!-- 添加页面 -->
+<div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">收入记账</h4>
+            </div>
+            <form id="addForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="incomeType" class="col-sm-3 control-label">收入类别名称:<font
+                                    color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="incomeType" name="incomeType" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="addSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--修改界面-->
+<div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">修改收入类别</h4>
+            </div>
+            <form id="updateForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="updateIncType" class="col-sm-3 control-label">收入类别名称:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="updateIncType" name="updateIncType" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <input type="hidden" name="updateIncTypeId" id="updateIncTypeId"/>
+                        <input type="hidden" name="oldIncType" id="oldIncType"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="updateSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 删除确认 -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                <h4 class="modal-title">删除收入类别</h4>
+            </div>
+            <div class="modal-body text-center">
+                <H3>您确定要删除此收入类别吗?</H3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="deleteMenuBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/messages_zh.js"></script>
+<script type="text/javascript" src="/js/income/incometype.js"></script>
