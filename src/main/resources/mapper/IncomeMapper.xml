@@ -19,7 +19,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from income
+    from income a
     where income_id = #{incomeId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -183,4 +183,5 @@
       </if>
     </if>
   </select>
+
 </mapper>

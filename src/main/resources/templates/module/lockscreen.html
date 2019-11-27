@@ -23,13 +23,13 @@
     <a href="#"><b>XIAO</b>GUOQING</a>
   </div>
   <!-- User name -->
-  <div class="lockscreen-name"><span   th:text="${session.admin}==null?'包包':${session.admin.username}"></span></div>
+  <div class="lockscreen-name"><span   th:text="${session.admin.name}"></span></div>
 
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
     <!-- lockscreen image -->
     <div class="lockscreen-image">
-      <img src="/img/avatar.jpg" alt="User Image">
+      <img th:src="${session.admin.pic}" alt="User Image">
     </div>
     <!-- /.lockscreen-image -->
 

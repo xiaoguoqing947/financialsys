@@ -33,11 +33,11 @@
                 data-toggle="modal" data-target="#addModal" id="addBtn"><i class="fa fa-plus" aria-hidden="true"></i>记账
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-info " type="button" id="updateBtn"><i class="fa fa-edit"></i>修改</button>
+        <button class="btn btn-info " type="button" id="updateBtn"><i class="fa fa-edit"></i>账单修改</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-danger " type="button" id="deleteBtn"><i class="fa fa-trash"></i>删除</button>
+        <button class="btn btn-danger " type="button" id="deleteBtn"><i class="fa fa-trash"></i>删除账单</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn " type="button" id="detailBtn"><i class="fa fa-info"></i>详情</button>
+        <button class="btn " type="button" id="detailBtn"><i class="fa fa-info"></i>账单详情</button>
     </div>
     <div class="datagrid datagrid-striped" id="listDataGrid" data-ride="datagrid"></div>
     <div id="listPager" class="pager" data-ride="pager"></div>
@@ -77,7 +77,7 @@
                         <div class="form-group">
                             <label for="incomeSource" class="col-sm-3 control-label">收入来源:<font color="red">*</font></label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="incomeSource" name="incomeSource" type="text">
+                                <input class="form-control" id="incomeSource" name="incomeSource" type="text" placeholder="即：父亲，上司，公司，朋友">
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,6 +100,144 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                         <button type="submit" id="addSaveBtn" class="btn btn-primary">保存</button>
                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--修改界面-->
+<div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">修改收入账单</h4>
+            </div>
+            <form id="updateForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="udIncTypeId" class="col-sm-3 control-label">收入类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="udIncTypeId" name="udIncTypeId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udIncPrice" class="col-sm-3 control-label">收入金额:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="udIncPrice" name="udIncPrice" type="text">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udPayMethod" class="col-sm-3 control-label">收款方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="udPayMethod" name="udPayMethod">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udIncSource" class="col-sm-3 control-label">收入来源:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="udIncSource" name="udIncSource" type="text" placeholder="即：父亲，上司，公司，朋友">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udPayAccount" class="col-sm-3 control-label">收入账户:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="udPayAccount" name="udPayAccount" type="text">
+                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udIncDesc" class="col-sm-3 control-label">收入描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="udIncDesc" name="udIncDesc" rows="6" cols="60"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <input type="hidden" name="udIncId" id="udIncId"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="updateSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 删除确认 -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                <h4 class="modal-title">删除该账单</h4>
+            </div>
+            <div class="modal-body text-center">
+                <H3>您确定要删除此账单吗?</H3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="deleteMenuBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情界面-->
+<div class="modal fade" id="detailModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">收入账单详情</h4>
+            </div>
+            <form id="detailForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="dtIncTypeId" class="col-sm-3 control-label">收入类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtIncTypeId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtIncPrice" class="col-sm-3 control-label">收入金额:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtIncPrice"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtPayMethod" class="col-sm-3 control-label">收款方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtPayMethod"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtIncSource" class="col-sm-3 control-label">收入来源:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtIncSource"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtPayAccount" class="col-sm-3 control-label">收入账户:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtPayAccount"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtIncDesc" class="col-sm-3 control-label">收入描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtIncDesc"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " data-dismiss="modal">关闭</button>
                 </div>
             </form>
         </div>

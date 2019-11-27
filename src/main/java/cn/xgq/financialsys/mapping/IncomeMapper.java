@@ -20,7 +20,5 @@ public interface IncomeMapper {
 
     int findIncomeCount(Map<String, Object> searchMap);
 
-    List<Income> findIncomeList(Map<String, Object> searchMap);
-
     List<Map<String,Object>> findIncomeMap(Map<String, Object> searchMap);
 }

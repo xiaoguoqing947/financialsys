@@ -1,3 +1,4 @@
+var menuValidate;
 $(document).ready(function () {
     var currentPage = 1;
     var pageSize = 10;
@@ -139,7 +140,7 @@ $(document).ready(function () {
     //添加保存
     $("#addSaveBtn").click(function () {
         var validMenuNameUrl = "/api/menu/validMenuName";
-        $("#addForm").validate({
+        menuValidate=$("#addForm").validate({
             rules: {
                 name: {
                     "required": true,
@@ -189,10 +190,11 @@ $(document).ready(function () {
                                 type: 'success',
                                 placement: 'center'
                             }).show();
+                            $('#name').val('');
+                            $('#url').val('');
                             $('#addModal').modal('hide', 'fit');
                             queryListFun();
-                            $("#addForm").resetForm();
-                            $("#addForm").validate().resetForm();
+                            menuValidate.resetForm();
                         } else {
                             new $.zui.Messager("添加失败", {
                                 type: 'warning',

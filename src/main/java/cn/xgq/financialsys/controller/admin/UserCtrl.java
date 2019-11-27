@@ -1,5 +1,6 @@
 package cn.xgq.financialsys.controller.admin;
 
+import cn.xgq.financialsys.annotation.SystemControllerLog;
 import cn.xgq.financialsys.domain.Menu;
 import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.domain.dto.menu.SearchMenuForm;
@@ -64,6 +65,7 @@ public class UserCtrl {
 
     @ResponseBody
     @PostMapping("/delete")
+    @SystemControllerLog(description = "删除用户")
     public Map<String,Object> deleteMenu(@RequestParam("username") String username, HttpServletRequest request){
         Map<String,Object> resultMap=new HashMap<String, Object>();
         if(ValidateMethod.isTokenCheck(request) && userSer.deleteUser(username)){
