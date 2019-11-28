@@ -7,18 +7,19 @@
     <result column="expend_use" jdbcType="VARCHAR" property="expendUse" />
     <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
     <result column="pay_account" jdbcType="VARCHAR" property="payAccount" />
+    <result column="expend_price" jdbcType="DOUBLE" property="expendPrice" />
     <result column="expend_date" jdbcType="TIMESTAMP" property="expendDate" />
     <result column="expend_user" jdbcType="VARCHAR" property="expendUser" />
     <result column="expend_desc" jdbcType="VARCHAR" property="expendDesc" />
   </resultMap>
   <sql id="Base_Column_List">
-    expend_id, expend_type_id, expend_use, pay_method, pay_account, expend_date, expend_user, 
-    expend_desc
+    expend_id, a.expend_type_id, expend_use, pay_method, pay_account, expend_price, expend_date,
+    expend_user, expend_desc
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from expend
+    from expend a
     where expend_id = #{expendId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -27,11 +28,13 @@
   </delete>
   <insert id="insert" parameterType="cn.xgq.financialsys.domain.Expend">
     insert into expend (expend_id, expend_type_id, expend_use, 
-      pay_method, pay_account, expend_date, 
-      expend_user, expend_desc)
+      pay_method, pay_account, expend_price, 
+      expend_date, expend_user, expend_desc
+      )
     values (#{expendId,jdbcType=INTEGER}, #{expendTypeId,jdbcType=INTEGER}, #{expendUse,jdbcType=VARCHAR}, 
-      #{payMethod,jdbcType=VARCHAR}, #{payAccount,jdbcType=VARCHAR}, #{expendDate,jdbcType=TIMESTAMP}, 
-      #{expendUser,jdbcType=VARCHAR}, #{expendDesc,jdbcType=VARCHAR})
+      #{payMethod,jdbcType=VARCHAR}, #{payAccount,jdbcType=VARCHAR}, #{expendPrice,jdbcType=DOUBLE}, 
+      #{expendDate,jdbcType=TIMESTAMP}, #{expendUser,jdbcType=VARCHAR}, #{expendDesc,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.xgq.financialsys.domain.Expend">
     insert into expend
@@ -50,6 +53,9 @@
       </if>
       <if test="payAccount != null">
         pay_account,
+      </if>
+      <if test="expendPrice != null">
+        expend_price,
       </if>
       <if test="expendDate != null">
         expend_date,
@@ -77,6 +83,9 @@
       <if test="payAccount != null">
         #{payAccount,jdbcType=VARCHAR},
       </if>
+      <if test="expendPrice != null">
+        #{expendPrice,jdbcType=DOUBLE},
+      </if>
       <if test="expendDate != null">
         #{expendDate,jdbcType=TIMESTAMP},
       </if>
@@ -103,6 +112,9 @@
       <if test="payAccount != null">
         pay_account = #{payAccount,jdbcType=VARCHAR},
       </if>
+      <if test="expendPrice != null">
+        expend_price = #{expendPrice,jdbcType=DOUBLE},
+      </if>
       <if test="expendDate != null">
         expend_date = #{expendDate,jdbcType=TIMESTAMP},
       </if>
@@ -121,9 +133,54 @@
       expend_use = #{expendUse,jdbcType=VARCHAR},
       pay_method = #{payMethod,jdbcType=VARCHAR},
       pay_account = #{payAccount,jdbcType=VARCHAR},
+      expend_price = #{expendPrice,jdbcType=DOUBLE},
       expend_date = #{expendDate,jdbcType=TIMESTAMP},
       expend_user = #{expendUser,jdbcType=VARCHAR},
       expend_desc = #{expendDesc,jdbcType=VARCHAR}
     where expend_id = #{expendId,jdbcType=INTEGER}
   </update>
+
+  <select id="findExpendCount" parameterType="java.util.Map" resultType="int">
+    select count(*)
+    from expend a right join expendtype b on a.expend_type_id=b.expend_type_id
+    RIGHT JOIN dictionary d on d.dcis_code='pay_method' and d.key_value=a.pay_method
+    <where>
+      <if test="minPrice != null">
+        <if test="maxPrice != null">
+          a.expend_price &lt; #{maxPrice} and a.expend_price &gt;  #{minPrice}
+        </if>
+      </if>
+      <if test="expendType !=null">
+        and a.expend_type_id = #{expendType}
+      </if>
+      <if test="expendUser !=null">
+        and a.expend_user = #{expendUser}
+      </if>
+    </where>
+  </select>
+
+  <select id="findExpendMap" parameterType="java.util.Map" resultType="java.util.HashMap">
+    select <include refid="Base_Column_List" />,b.enpend_type,d.key_name, DATE_FORMAT(a.expend_date,'%Y-%m-%d') as expend_date
+    from expend a right join expendtype b on a.expend_type_id=b.expend_type_id
+    RIGHT JOIN dictionary d on d.dcis_code='pay_method' and d.key_value=a.pay_method
+    <where>
+      <if test="minPrice != null">
+        <if test="maxPrice != null">
+          a.expend_price &lt; #{maxPrice} and expend_price &gt;  #{minPrice}
+        </if>
+      </if>
+      <if test="expendType !=null">
+        and a.expend_type_id = #{expendType}
+      </if>
+      <if test="expendUser !=null">
+        and a.expend_user = #{expendUser}
+      </if>
+    </where>
+    <if test="pageSize != null">
+      <if test="currentPage != null">
+        limit #{indexCount},#{pageSize}
+      </if>
+    </if>
+  </select>
+
 </mapper>

@@ -1,10 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="panel">
+    <div class="panel-heading">
+        支出查询
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">支出金额</span>
+                    <input type="text" id="queryMinPrice" name="queryMinPrice" placeholder="金额最小值">￥
+                    <strong>-</strong>&nbsp;&nbsp;
+                    <input type="text" id="queryMaxPrice" name="queryMaxPrice" placeholder="金额最大值">￥
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">支出类别</span>
+                    <select id="queryExpendType" name="queryExpendType" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-success" type="button" id="searchBtn"><i class="fa fa-search"
+                                                                                aria-hidden="true"></i>搜索
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="datagrid">
+    <div class="search-box">
+        <button class="btn btn-success " type="button"
+                data-toggle="modal" data-target="#addModal" id="addBtn"><i class="fa fa-plus" aria-hidden="true"></i>记账
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-info " type="button" id="updateBtn"><i class="fa fa-edit"></i>账单修改</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger " type="button" id="deleteBtn"><i class="fa fa-trash"></i>删除账单</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn " type="button" id="detailBtn"><i class="fa fa-info"></i>账单详情</button>
+    </div>
+    <div class="datagrid datagrid-striped" id="listDataGrid" data-ride="datagrid"></div>
+    <div id="listPager" class="pager" data-ride="pager"></div>
+</div>
+<!-- 添加页面 -->
+<div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">支出记账</h4>
+            </div>
+            <form id="addForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="expendTypeId" class="col-sm-3 control-label">支出类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="expendTypeId" name="expendTypeId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expendPrice" class="col-sm-3 control-label">支出金额:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="expendPrice" name="expendPrice" type="text">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payMethod" class="col-sm-3 control-label">支出方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="payMethod" name="payMethod">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expendUse" class="col-sm-3 control-label">支出用途:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="expendUse" name="expendUse" type="text" placeholder="即：父亲，上司，公司，朋友">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payAccount" class="col-sm-3 control-label">支出账户:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="payAccount" name="payAccount" type="text">
+                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expendDesc" class="col-sm-3 control-label">支出描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="expendDesc" name="expendDesc" rows="6" cols="60"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="addSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--修改界面-->
+<div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">修改支出账单</h4>
+            </div>
+            <form id="updateForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="udExpTypeId" class="col-sm-3 control-label">支出类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="udExpTypeId" name="udExpTypeId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udExpPrice" class="col-sm-3 control-label">支出金额:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="udExpPrice" name="udExpPrice" type="text">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udPayMethod" class="col-sm-3 control-label">收款方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="udPayMethod" name="udPayMethod">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udExpUse" class="col-sm-3 control-label">支出用途:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="udExpUse" name="udExpUse" type="text" placeholder="即：父亲，上司，公司，朋友">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udPayAccount" class="col-sm-3 control-label">支出账户:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="udPayAccount" name="udPayAccount" type="text">
+                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="udExpDesc" class="col-sm-3 control-label">支出描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="udExpDesc" name="udExpDesc" rows="6" cols="60"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <input type="hidden" name="udExpId" id="udExpId"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="updateSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 删除确认 -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                <h4 class="modal-title">删除该账单</h4>
+            </div>
+            <div class="modal-body text-center">
+                <H3>您确定要删除此账单吗?</H3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="deleteMenuBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情界面-->
+<div class="modal fade" id="detailModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">支出账单详情</h4>
+            </div>
+            <form id="detailForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="dtExpTypeId" class="col-sm-3 control-label">支出类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtExpTypeId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtExpPrice" class="col-sm-3 control-label">支出金额:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtExpPrice"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtPayMethod" class="col-sm-3 control-label">收款方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtPayMethod"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtExpUse" class="col-sm-3 control-label">支出用途:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtExpUse"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtPayAccount" class="col-sm-3 control-label">支出账户:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtPayAccount"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dtExpDesc" class="col-sm-3 control-label">支出描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <span id="dtExpDesc"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/messages_zh.js"></script>
+<script type="text/javascript" src="/js/expend/expend.js"></script>

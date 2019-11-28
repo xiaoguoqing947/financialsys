@@ -18,7 +18,8 @@ public class User{
     private String name;
 
     private String sex;
-
+    @DateTimeFormat(pattern="yyyy年MM月dd")//页面写入数据库时格式化
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy年MM月dd")
     private Date born;
 
     private String pic;

@@ -83,7 +83,7 @@ public class UserCtrl {
         if(ValidateMethod.isTokenCheck(request)){
             resultMap.put("success","1");
             User user = userSer.findUser(username);
-            System.out.println(user);
+//            System.out.println(user);
             resultMap.put("user",user);
         }else{
             resultMap.put("success","0");

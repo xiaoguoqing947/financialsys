@@ -2,8 +2,10 @@ package cn.xgq.financialsys.controller.admin;
 
 import cn.xgq.financialsys.annotation.SystemControllerLog;
 import cn.xgq.financialsys.domain.Menu;
+import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.enums.MessageMeta;
 import cn.xgq.financialsys.service.inter.MenuSer;
+import cn.xgq.financialsys.service.inter.UserSer;
 import cn.xgq.financialsys.util.ValidateMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class MonitorCtrl {
 
     @Autowired
     private MenuSer menuSer;
+    @Autowired
+    private UserSer userSer;
 
     @GetMapping("/lockscreen")
     public String lockScreen() {
@@ -43,6 +47,21 @@ public class MonitorCtrl {
             resultMap.put("status", MessageMeta.sendError.getMsg());
         }
         System.err.println(resultMap);
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/sysmonitor/queryUserList")
+    public Map<String, Object> queryUserList(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (ValidateMethod.isTokenCheck(request)) {
+            Map<String, Object> searchMap = new HashMap<String, Object>();
+            List<User> userList = userSer.findList(searchMap);
+            resultMap.put("userList", userList);
+            resultMap.put("status", "success");
+        }else{
+            resultMap.put("status", "fail");
+        }
         return resultMap;
     }
 }
