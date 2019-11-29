@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,6 +72,12 @@ public class ExpCtrl {
             resultMap.put("pager", resultPagerMap);
             if (totalCount > 0) {
                 expendList = expendSer.listExpend(searchMap);
+                Date currentTime = null;
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd");
+                for (int i = 0; i < expendList.size(); i++) {
+                    currentTime = (Date) expendList.get(i).get("expend_date");
+                    expendList.get(i).put("expend_date", formatter.format(currentTime));
+                }
                 resultMap.put("data", expendList);
             } else {
                 resultMap.put("message", "查无数据");
@@ -102,7 +109,7 @@ public class ExpCtrl {
     @ResponseBody
     @PostMapping("/add")
     public boolean addExpend(@Valid AddExpendForm form, BindingResult result, HttpServletRequest req) {
-        boolean flag=false;
+        boolean flag = false;
         if (ValidateMethod.isTokenCheck(req)) {
             Expend expend = new Expend();
             BeanUtils.copyProperties(form, expend);
@@ -119,21 +126,21 @@ public class ExpCtrl {
 
     @ResponseBody
     @PostMapping("/initUpdate")
-    public Map<String,Object> initUpdate(@RequestParam("expendId") String expendId, HttpServletRequest request){
-        Map<String,Object> resultMap=new HashMap<String, Object>();
+    public Map<String, Object> initUpdate(@RequestParam("expendId") String expendId, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
         Expend expend = null;
-        if(ValidateMethod.isTokenCheck(request)){
+        if (ValidateMethod.isTokenCheck(request)) {
             Map<String, Object> searchMap = new HashMap<String, Object>();
             searchMap.put("dcis_code", "pay_method");
             List<Dictionary> dictionarys = dicSer.queryAll(searchMap);
             List<ExpendType> expendTypes = expendTypeSer.listExpendType();
             resultMap.put("dataDic", dictionarys);
             resultMap.put("dataExpT", expendTypes);
-            expend=expendSer.findExpend(expendId);
-            resultMap.put("result","success");
-            resultMap.put("expend",expend);
-        }else {
-            resultMap.put("result","fail");
+            expend = expendSer.findExpend(expendId);
+            resultMap.put("result", "success");
+            resultMap.put("expend", expend);
+        } else {
+            resultMap.put("result", "fail");
         }
         System.out.println(resultMap);
         return resultMap;
@@ -141,45 +148,45 @@ public class ExpCtrl {
 
     @ResponseBody
     @PostMapping("/update")
-    public Map<String,Object> updateMenu(UpdateExpendForm form, HttpServletRequest request){
-        Map<String,Object> resultMap=new HashMap<String, Object>();
-        if(ValidateMethod.isTokenCheck(request) && expendSer.updateExpend(form,request)){
-            resultMap.put("success","1");
-        }else{
-            resultMap.put("success","0");
+    public Map<String, Object> updateMenu(UpdateExpendForm form, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (ValidateMethod.isTokenCheck(request) && expendSer.updateExpend(form, request)) {
+            resultMap.put("success", "1");
+        } else {
+            resultMap.put("success", "0");
         }
         return resultMap;
     }
 
     @ResponseBody
     @PostMapping("/delete")
-    public Map<String,Object> deleteMenu(@RequestParam("expendId") String id,HttpServletRequest request){
-        Map<String,Object> resultMap=new HashMap<String, Object>();
-        if(ValidateMethod.isTokenCheck(request) && expendSer.deleteExpend(id)){
-            resultMap.put("success","1");
-        }else{
-            resultMap.put("success","0");
+    public Map<String, Object> deleteMenu(@RequestParam("expendId") String id, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (ValidateMethod.isTokenCheck(request) && expendSer.deleteExpend(id)) {
+            resultMap.put("success", "1");
+        } else {
+            resultMap.put("success", "0");
         }
         return resultMap;
     }
 
     @ResponseBody
     @PostMapping("/detail")
-    public Map<String,Object> detailMenu(@RequestParam("expendId") String id,HttpServletRequest request){
-        Map<String,Object> resultMap=new HashMap<String, Object>();
-        Expend expend=null;
-        if(ValidateMethod.isTokenCheck(request)){
-            resultMap.put("success","1");
+    public Map<String, Object> detailMenu(@RequestParam("expendId") String id, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Expend expend = null;
+        if (ValidateMethod.isTokenCheck(request)) {
+            resultMap.put("success", "1");
             Map<String, Object> searchMap = new HashMap<String, Object>();
             searchMap.put("dcis_code", "pay_method");
             List<Dictionary> dictionarys = dicSer.queryAll(searchMap);
             List<ExpendType> expendTypes = expendTypeSer.listExpendType();
             resultMap.put("dataDic", dictionarys);
             resultMap.put("dataExpT", expendTypes);
-            expend=expendSer.findExpend(id);
-            resultMap.put("expend",expend);
-        }else{
-            resultMap.put("success","0");
+            expend = expendSer.findExpend(id);
+            resultMap.put("expend", expend);
+        } else {
+            resultMap.put("success", "0");
         }
         return resultMap;
     }

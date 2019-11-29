@@ -37,7 +37,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="expend" domainObjectName="Expend" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="userbudget" domainObjectName="UserBudget" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
     </context>

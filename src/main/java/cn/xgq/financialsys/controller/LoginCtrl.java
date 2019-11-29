@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,6 +81,7 @@ public class LoginCtrl {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         User user = new User();
         BeanUtils.copyProperties(form, user);
+        user.setRegistData(new Date());
         if (userSer.addUser(user)) {
             resultMap.put("status", MessageMeta.sendSuccess.getMsg());
         } else {

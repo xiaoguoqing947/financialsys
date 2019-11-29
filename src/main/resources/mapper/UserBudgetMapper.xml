@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xgq.financialsys.mapping.UserBudgetMapper">
+  <resultMap id="BaseResultMap" type="cn.xgq.financialsys.domain.UserBudget">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="m_inc_total_price" jdbcType="DOUBLE" property="mIncTotalPrice" />
+    <result column="m_exp_max_price" jdbcType="DOUBLE" property="mExpMaxPrice" />
+    <result column="m_exp_suit_price" jdbcType="DOUBLE" property="mExpSuitPrice" />
+    <result column="m_exp_joy_price" jdbcType="DOUBLE" property="mExpJoyPrice" />
+    <result column="m_exp_shop_price" jdbcType="DOUBLE" property="mExpShopPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, m_inc_total_price, m_exp_max_price, m_exp_suit_price, m_exp_joy_price, 
+    m_exp_shop_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userbudget
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from userbudget
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.xgq.financialsys.domain.UserBudget">
+    insert into userbudget (id, username, m_inc_total_price, 
+      m_exp_max_price, m_exp_suit_price, m_exp_joy_price, 
+      m_exp_shop_price)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{mIncTotalPrice,jdbcType=DOUBLE}, 
+      #{mExpMaxPrice,jdbcType=DOUBLE}, #{mExpSuitPrice,jdbcType=DOUBLE}, #{mExpJoyPrice,jdbcType=DOUBLE}, 
+      #{mExpShopPrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xgq.financialsys.domain.UserBudget">
+    insert into userbudget
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="mIncTotalPrice != null">
+        m_inc_total_price,
+      </if>
+      <if test="mExpMaxPrice != null">
+        m_exp_max_price,
+      </if>
+      <if test="mExpSuitPrice != null">
+        m_exp_suit_price,
+      </if>
+      <if test="mExpJoyPrice != null">
+        m_exp_joy_price,
+      </if>
+      <if test="mExpShopPrice != null">
+        m_exp_shop_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="mIncTotalPrice != null">
+        #{mIncTotalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpMaxPrice != null">
+        #{mExpMaxPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpSuitPrice != null">
+        #{mExpSuitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpJoyPrice != null">
+        #{mExpJoyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpShopPrice != null">
+        #{mExpShopPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xgq.financialsys.domain.UserBudget">
+    update userbudget
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="mIncTotalPrice != null">
+        m_inc_total_price = #{mIncTotalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpMaxPrice != null">
+        m_exp_max_price = #{mExpMaxPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpSuitPrice != null">
+        m_exp_suit_price = #{mExpSuitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpJoyPrice != null">
+        m_exp_joy_price = #{mExpJoyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mExpShopPrice != null">
+        m_exp_shop_price = #{mExpShopPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xgq.financialsys.domain.UserBudget">
+    update userbudget
+    set username = #{username,jdbcType=VARCHAR},
+      m_inc_total_price = #{mIncTotalPrice,jdbcType=DOUBLE},
+      m_exp_max_price = #{mExpMaxPrice,jdbcType=DOUBLE},
+      m_exp_suit_price = #{mExpSuitPrice,jdbcType=DOUBLE},
+      m_exp_joy_price = #{mExpJoyPrice,jdbcType=DOUBLE},
+      m_exp_shop_price = #{mExpShopPrice,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryUserBgByUsername" resultType="int">
+    select count(*) from userbudget where username=#{un}
+  </select>
+</mapper>

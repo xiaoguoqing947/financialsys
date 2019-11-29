@@ -161,7 +161,7 @@
   </select>
 
   <select id="findIncomeMap" parameterType="java.util.Map" resultType="java.util.HashMap">
-    select <include refid="Base_Column_List" />,b.income_type,d.key_name, DATE_FORMAT(a.income_date,'%Y-%m-%d %H:%i:%s') as income_date
+    select <include refid="Base_Column_List" />,b.income_type,d.key_name, DATE_FORMAT(a.income_date,'%Y年%m月%d') as income_date
     from income a right join incometype b on a.income_type_id=b.income_type_id
     RIGHT JOIN dictionary d on d.dcis_code='pay_method' and d.key_value=a.pay_method
     <where>

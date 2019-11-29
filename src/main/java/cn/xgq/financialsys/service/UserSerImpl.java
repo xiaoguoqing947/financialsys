@@ -62,7 +62,7 @@ public class UserSerImpl implements UserSer {
     public boolean addUser(User user) {
         int num = 0;
         try {
-            num = userMapper.insertUser(user);
+            num = userMapper.insertSelective(user);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }

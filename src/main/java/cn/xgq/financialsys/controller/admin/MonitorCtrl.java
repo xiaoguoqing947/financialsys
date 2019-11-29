@@ -1,6 +1,5 @@
 package cn.xgq.financialsys.controller.admin;
 
-import cn.xgq.financialsys.annotation.SystemControllerLog;
 import cn.xgq.financialsys.domain.Menu;
 import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.enums.MessageMeta;
@@ -9,12 +8,9 @@ import cn.xgq.financialsys.service.inter.UserSer;
 import cn.xgq.financialsys.util.ValidateMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +54,21 @@ public class MonitorCtrl {
             Map<String, Object> searchMap = new HashMap<String, Object>();
             List<User> userList = userSer.findList(searchMap);
             resultMap.put("userList", userList);
+            resultMap.put("status", "success");
+        }else{
+            resultMap.put("status", "fail");
+        }
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/monitor/queryCurrentUser")
+    public Map<String, Object> queryCurrentUser(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        if (ValidateMethod.isTokenCheck(request)) {
+            User user= (User) request.getSession().getAttribute("admin");
+            User currentUser = userSer.findUser(user.getUsername());
+            resultMap.put("currentUser", currentUser);
             resultMap.put("status", "success");
         }else{
             resultMap.put("status", "fail");
