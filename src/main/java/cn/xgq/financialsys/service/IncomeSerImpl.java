@@ -3,6 +3,8 @@ package cn.xgq.financialsys.service;
 import cn.xgq.financialsys.domain.Income;
 import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.domain.dto.income.UpdateIncomeForm;
+import cn.xgq.financialsys.domain.vo.VoExpStics;
+import cn.xgq.financialsys.domain.vo.VoIncStics;
 import cn.xgq.financialsys.mapping.IncomeMapper;
 import cn.xgq.financialsys.service.inter.IncomeSer;
 import org.slf4j.Logger;
@@ -79,5 +81,10 @@ public class IncomeSerImpl implements IncomeSer {
             LOGGER.error(e.getMessage());
         }
         return num > 0;
+    }
+
+    @Override
+    public List<VoIncStics> findIncStatistics(Map<String, Object> searchMap) {
+        return incomeMapper.findIncStatistics(searchMap);
     }
 }

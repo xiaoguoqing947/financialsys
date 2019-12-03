@@ -2,6 +2,7 @@ package cn.xgq.financialsys.service.inter;
 
 import cn.xgq.financialsys.domain.Income;
 import cn.xgq.financialsys.domain.dto.income.UpdateIncomeForm;
+import cn.xgq.financialsys.domain.vo.VoIncStics;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -19,4 +20,6 @@ public interface IncomeSer {
     boolean updateIncome(UpdateIncomeForm form, HttpServletRequest request);
 
     boolean deleteIncome(String id);
+
+    List<VoIncStics> findIncStatistics(Map<String, Object> searchMap);
 }

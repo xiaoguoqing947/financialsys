@@ -2,6 +2,7 @@ package cn.xgq.financialsys.service.inter;
 
 import cn.xgq.financialsys.domain.Expend;
 import cn.xgq.financialsys.domain.dto.expend.UpdateExpendForm;
+import cn.xgq.financialsys.domain.vo.VoExpStics;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -19,4 +20,6 @@ public interface ExpendSer {
     boolean updateExpend(UpdateExpendForm form, HttpServletRequest request);
 
     boolean deleteExpend(String id);
+
+    List<VoExpStics> findExpStatistics(Map<String, Object> searchMap);
 }

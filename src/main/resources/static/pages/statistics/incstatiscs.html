@@ -1,0 +1,42 @@
+<div class="panel">
+    <div class="panel-heading">
+        收入统计
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="input-group">
+                    <span  class="input-group-addon">选择查询方式：</span>
+                    <select class="form-control" id="selectTimeMethod">
+                        <option value="mouth">按月</option>
+                        <option value="year">按年</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">选择月份：</span>
+                    <input type="text" class="form-control" placeholder="请在这里选择日期" readonly="readonly" id="mouth" name="mouth">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">选择年份：</span>
+                    <input type="text" class="form-control" placeholder="不可选择" readonly="readonly" id="year" name="year" disabled>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-success" type="button" id="searchBtn"><i class="fa fa-search"
+                                                                                aria-hidden="true"></i>搜索
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="container" style="max-width:1500px;height:500px"></div>
+<script src="/js/chart/highcharts.js"></script>
+<script src="/js/chart/exporting.js"></script>
+<script src="/js/chart/series-label.js"></script>
+<script src="/js/chart/oldie.js"></script>
+<script src="/js/chart/highcharts-zh_CN.js"></script>
+<script src="/js/statistics/incstatiscs.js"></script>

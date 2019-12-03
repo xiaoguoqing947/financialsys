@@ -184,4 +184,23 @@
     </if>
   </select>
 
+  <select id="findIncStatistics" parameterType="map" resultType="cn.xgq.financialsys.domain.vo.VoIncStics">
+    select income_type_id as incomeTypeId,income_price as incomePrice,DATE_FORMAT(income_date,'%Y-%m-%d') as incomeDate
+    from income
+    <where>
+      <if test="year != null">
+        DATE_FORMAT(income_date,'%Y') = #{year}
+      </if>
+      <if test="mouth != null">
+        and DATE_FORMAT(income_date,'%m') = #{mouth}
+      </if>
+      <if test="incomeTypeId !=null">
+        and income_type_id = #{incomeTypeId}
+      </if>
+      <if test="incomeUser !=null">
+        and income_user = #{incomeUser}
+      </if>
+    </where>
+  </select>
+
 </mapper>

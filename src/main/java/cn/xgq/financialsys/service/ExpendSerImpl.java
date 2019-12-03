@@ -3,6 +3,7 @@ package cn.xgq.financialsys.service;
 import cn.xgq.financialsys.domain.Expend;
 import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.domain.dto.expend.UpdateExpendForm;
+import cn.xgq.financialsys.domain.vo.VoExpStics;
 import cn.xgq.financialsys.mapping.ExpendMapper;
 import cn.xgq.financialsys.service.inter.ExpendSer;
 import org.slf4j.Logger;
@@ -78,5 +79,10 @@ public class ExpendSerImpl implements ExpendSer {
             LOGGER.error(e.getMessage());
         }
         return num > 0;
+    }
+
+    @Override
+    public List<VoExpStics> findExpStatistics(Map<String, Object> searchMap) {
+        return expendMapper.findExpStatistics(searchMap);
     }
 }

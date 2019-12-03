@@ -183,4 +183,23 @@
     </if>
   </select>
 
+  <select id="findExpStatistics" parameterType="map" resultType="cn.xgq.financialsys.domain.vo.VoExpStics">
+    select expend_type_id as expendTypeId,expend_price as expendPrice,DATE_FORMAT(expend_date,'%Y-%m-%d') as expendDate
+    from expend
+    <where>
+      <if test="year != null">
+        DATE_FORMAT(expend_date,'%Y') = #{year}
+      </if>
+      <if test="mouth != null">
+       and DATE_FORMAT(expend_date,'%m') = #{mouth}
+      </if>
+      <if test="expendType !=null">
+        and expend_type_id = #{expendType}
+      </if>
+      <if test="expendUser !=null">
+        and expend_user = #{expendUser}
+      </if>
+    </where>
+  </select>
+
 </mapper>

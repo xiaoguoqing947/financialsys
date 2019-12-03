@@ -1,6 +1,7 @@
 package cn.xgq.financialsys.mapping;
 
 import cn.xgq.financialsys.domain.Income;
+import cn.xgq.financialsys.domain.vo.VoIncStics;
 
 import java.util.List;
 import java.util.Map;
@@ -21,4 +22,6 @@ public interface IncomeMapper {
     int findIncomeCount(Map<String, Object> searchMap);
 
     List<Map<String,Object>> findIncomeMap(Map<String, Object> searchMap);
+
+    List<VoIncStics> findIncStatistics(Map<String, Object> searchMap);
 }
