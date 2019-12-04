@@ -90,7 +90,7 @@ public class DateUtils {
     }
 
 
-    //获取字符串中的数字
+    //获取字符串中的数字  list数组下标  0 ：年份  1：月份  2：第几天
     public static List<Integer> getNumberInStr(String s){
         List<Integer> list=new ArrayList<Integer>();
         Pattern p = Pattern.compile("\\d{1,}");

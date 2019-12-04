@@ -32,7 +32,7 @@ public class StatisticsCtrl {
     @ResponseBody
     public Map<String, Object> expendStics(@RequestParam(value = "mouth") String mouth, @RequestParam(value = "year") String year, HttpServletRequest request) {
         if( mouth.trim() == ""  && year.trim() == "" ){
-            mouth="2019年12月";//设置默认值  数据统计时的默认值
+            mouth=DateUtils.getDateStr(new Date());//设置默认值  数据统计时的默认值
         }
         Map<String, Object> resultMap = new HashMap<String, Object>();
         Map<String, Object> searchMap = new HashMap<String, Object>();
@@ -47,7 +47,7 @@ public class StatisticsCtrl {
             searchMap.put("year", list.get(0));
             searchMap.put("mouth", list.get(1));
             List<VoExpStics> lists = expendSer.findExpStatistics(searchMap);
-            publicChartsInfo.setChartData(PersonUtils.getExpChartData(lists,days));
+            publicChartsInfo.setChartData(PersonUtils.getExpChartData(lists,days,2));
             publicChartsInfo.setSeriesName("消费支出");
             resultMap.put("lineChart", publicChartsInfo);
         }
@@ -57,7 +57,7 @@ public class StatisticsCtrl {
             searchMap.put("year", list.get(0));
             publicChartsInfo = new PublicChartsInfo(String.valueOf(list.get(0)));
             List<VoExpStics> lists = expendSer.findExpStatistics(searchMap);
-            publicChartsInfo.setChartData(PersonUtils.getExpChartData(lists,12));
+            publicChartsInfo.setChartData(PersonUtils.getExpChartData(lists,12,1));
             publicChartsInfo.setSeriesName("消费支出");
             resultMap.put("lineChart", publicChartsInfo);
         }
@@ -68,7 +68,7 @@ public class StatisticsCtrl {
     @ResponseBody
     public Map<String, Object> incomeStics(@RequestParam(value = "mouth") String mouth, @RequestParam(value = "year") String year, HttpServletRequest request) {
         if( mouth.trim() == ""  && year.trim() == "" ){
-            mouth="2019年12月";//设置默认值  数据统计时的默认值
+            mouth=DateUtils.getDateStr(new Date());//设置默认值  数据统计时的默认值 为当前月份
         }
         Map<String, Object> resultMap = new HashMap<String, Object>();
         Map<String, Object> searchMap = new HashMap<String, Object>();
@@ -83,7 +83,7 @@ public class StatisticsCtrl {
             searchMap.put("year", list.get(0));
             searchMap.put("mouth", list.get(1));
             List<VoIncStics> lists = incomeSer.findIncStatistics(searchMap);
-            publicChartsInfo.setChartData(PersonUtils.getIncChartData(lists,days));
+            publicChartsInfo.setChartData(PersonUtils.getIncChartData(lists,days,2));
             publicChartsInfo.setSeriesName("收入");
             resultMap.put("lineChart", publicChartsInfo);
         }
@@ -93,7 +93,7 @@ public class StatisticsCtrl {
             searchMap.put("year", list.get(0));
             publicChartsInfo = new PublicChartsInfo(String.valueOf(list.get(0)));
             List<VoIncStics> lists = incomeSer.findIncStatistics(searchMap);
-            publicChartsInfo.setChartData(PersonUtils.getIncChartData(lists,12));
+            publicChartsInfo.setChartData(PersonUtils.getIncChartData(lists,12,1));
             publicChartsInfo.setSeriesName("收入");
             resultMap.put("lineChart", publicChartsInfo);
         }

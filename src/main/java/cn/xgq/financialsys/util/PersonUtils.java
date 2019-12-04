@@ -6,7 +6,7 @@ import cn.xgq.financialsys.domain.vo.VoIncStics;
 import java.util.List;
 
 public class PersonUtils {
-    public static double[] getExpChartData(List<VoExpStics> lists,int count) {
+    public static double[] getExpChartData(List<VoExpStics> lists,int count,int mouthOrDay) {
         double[] chartData = new double[count];
         List<Integer> listVoTime = null;
         for (VoExpStics vo : lists) {
@@ -14,7 +14,7 @@ public class PersonUtils {
             listVoTime = DateUtils.getNumberInStr(vo.getExpendDate());
 //            System.out.println("显示月份（几月份：2）：" + listVoTime.get(1));
             for(int i=0;i<count;i++){
-                if (listVoTime.get(1) == i+1) {
+                if (listVoTime.get(mouthOrDay) == i+1) {
                     if(chartData[i] == 0){
                          chartData[i]=vo.getExpendPrice();break;
                     }else {
@@ -25,14 +25,14 @@ public class PersonUtils {
         }
         return  chartData;
     }
-
-    public static double[] getIncChartData(List<VoIncStics> voIncSticsList, int count) {
+    //mouthOrDay  0 year  1 mouth  2 day
+    public static double[] getIncChartData(List<VoIncStics> voIncSticsList, int count,int mouthOrDay) {
         double[] chartData = new double[count];
         List<Integer> listVoTime = null;
         for (VoIncStics vo : voIncSticsList) {
             listVoTime = DateUtils.getNumberInStr(vo.getIncomeDate());
             for(int i=0;i<count;i++){
-                if (listVoTime.get(1) == i+1) {
+                if (listVoTime.get(mouthOrDay) == i+1) {
                     if(chartData[i] == 0){
                          chartData[i]=vo.getIncomePrice();break;
                     }else {

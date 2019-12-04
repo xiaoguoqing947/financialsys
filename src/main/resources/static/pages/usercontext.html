@@ -1,49 +1,280 @@
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>用户个人主界面</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">主页</a></li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
-
-<!-- Main content -->
 <section class="content">
     <div class="row">
-        <!-- ./col -->
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>月收入总金额：50000￥</h3>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer"><span style="font-size:16px">收入</span><i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-6 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>当月已支出金额：3000￥</h3>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer"><span style="font-size:16px">支出</span><i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-    </div>
+        <div class="col-md-6 col-sm-6 ">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">消费支出情况</h3>
 
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="chart-responsive">
+                                <canvas id="pieChart" height="150"></canvas>
+                            </div>
+                            <!-- ./chart-responsive -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-4">
+                            <ul class="chart-legend clearfix">
+                                <li><i class="far fa-circle text-danger"></i> 饮食</li>
+                                <li><i class="far fa-circle text-success"></i> 服饰美容</li>
+                                <li><i class="far fa-circle text-warning"></i> 生活日用</li>
+                                <li><i class="far fa-circle text-info"></i> 文教娱乐</li>
+                                <li><i class="far fa-circle text-primary"></i> 交通出行</li>
+                                <li><i class="far fa-circle text-secondary"></i> 住房缴费</li>
+                                <li><i class="far fa-circle text-secondary"></i> 通讯物流</li>
+                                <li><i class="far fa-circle text-secondary"></i> 运动健康</li>
+                                <li><i class="far fa-circle text-secondary"></i> 其他消费</li>
+                            </ul>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer bg-white p-0">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                消费最高支出项
+                                <span class="float-right text-danger">
+                        <i class="fas fa-arrow-down text-sm"></i>
+                        12%</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                消费最低支出项
+                                <span class="float-right text-warning">
+                        <i class="fas fa-arrow-left text-sm"></i> 0%
+                      </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.footer -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <div class="col-md-6 col-sm-6 ">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">用户个人预算情况</h1>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table table-condensed" style="text-align: center">
+                        <thead>
+                        <tr>
+                            <th style="width: 50px">序号</th>
+                            <th>预算说明</th>
+                            <th style="width: 200px">进度</th>
+                            <th style="width: 100px">所占%比</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr   style="height: 50px;">
+                            <td>1.</td>
+                            <td>月已支出金额/月预定最大支出金额</td>
+                            <td>
+                                <div class="progress progress-xs  progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                </div>
+                            </td>
+                            <td><span class="badge bg-danger">55%</span></td>
+                        </tr>
+                        <tr style="height: 50px">
+                            <td>2.</td>
+                            <td>月已支出金额/月预定合理支出金额</td>
+                            <td>
+                                <div class="progress progress-xs progress-striped active" >
+                                    <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                </div>
+                            </td>
+                            <td><span class="badge bg-warning">70%</span></td>
+                        </tr>
+                        <tr style="height: 50px">
+                            <td>3.</td>
+                            <td>月已支出娱乐金额/月预定娱乐支出金额</td>
+                            <td>
+                                <div class="progress progress-xs progress-striped active">
+                                    <div class="progress-bar bg-primary" style="width: 30%"></div>
+                                </div>
+                            </td>
+                            <td><span class="badge bg-primary">30%</span></td>
+                        </tr>
+                        <tr style="height: 50px">
+                            <td>4.</td>
+                            <td>月已支出购物金额/月预定购物支出金额</td>
+                            <td>
+                                <div class="progress progress-xs progress-striped active">
+                                    <div class="progress-bar bg-success" style="width: 90%"></div>
+                                </div>
+                            </td>
+                            <td><span class="badge bg-success">90%</span></td>
+                        </tr>
+                        <tr style="height: 50px">
+                            <td>5.</td>
+                            <td>月总收入剩余</td>
+                            <td>
+                                <div class="progress progress-xs progress-striped active">
+                                    <div class="progress-bar bg-success" style="width: 90%"></div>
+                                </div>
+                            </td>
+                            <td><span class="badge bg-success">90%</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">每月总结报告</h5>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="text-center">
+                                <strong>销售情况: 2014年1月 - 2014年5月</strong>
+                            </p>
+
+                            <div class="chart">
+                                <!-- Sales Chart Canvas -->
+                                <canvas id="salesChart" height="180" style="height: 250px;"></canvas>
+                            </div>
+                            <!-- /.chart-responsive -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-4">
+                            <p class="text-center">
+                                <strong>目标达成</strong>
+                            </p>
+
+                            <div class="progress-group">
+                                将产品添加到购物车
+                                <span class="float-right"><b>160</b>/200</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-primary" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <!-- /.progress-group -->
+
+                            <div class="progress-group">
+                                完成购买
+                                <span class="float-right"><b>310</b>/400</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-danger" style="width: 75%"></div>
+                                </div>
+                            </div>
+
+                            <!-- /.progress-group -->
+                            <div class="progress-group">
+                                <span class="progress-text">访问高级页</span>
+                                <span class="float-right"><b>480</b>/800</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-success" style="width: 60%"></div>
+                                </div>
+                            </div>
+
+                            <!-- /.progress-group -->
+                            <div class="progress-group">
+                                发送查询
+                                <span class="float-right"><b>250</b>/500</span>
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-warning" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            <!-- /.progress-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- ./card-body -->
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                <span class="description-percentage text-success"><i
+                                        class="fas fa-caret-up"></i> 17%</span>
+                                <h5 class="description-header">$35,210.43</h5>
+                                <span class="description-text">总收入</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                <span class="description-percentage text-warning"><i
+                                        class="fas fa-caret-left"></i> 0%</span>
+                                <h5 class="description-header">$10,390.90</h5>
+                                <span class="description-text">总消耗</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                <span class="description-percentage text-success"><i
+                                        class="fas fa-caret-up"></i> 20%</span>
+                                <h5 class="description-header">$24,813.53</h5>
+                                <span class="description-text">利润总额</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block">
+                                <span class="description-percentage text-danger"><i
+                                        class="fas fa-caret-down"></i> 18%</span>
+                                <h5 class="description-header">1200</h5>
+                                <span class="description-text">目标完成</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
 </section>
 <script src="/js/context/usercontext.js"></script>

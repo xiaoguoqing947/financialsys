@@ -6,7 +6,7 @@ function loginout() {
 window.onload = function () {
 //要初始化的东西
     $("#context").empty();
-    $("#context").load('/pages/usercontext.html');
+    $("#context").load('/pages/perInfo.html');
 };
 $(document).ready(function () {
     var token = $.zui.store.get("token");
