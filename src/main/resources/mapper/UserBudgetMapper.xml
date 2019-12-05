@@ -119,4 +119,8 @@
   <select id="queryUserBgByUsername" resultType="int">
     select count(*) from userbudget where username=#{un}
   </select>
+
+  <select id="findUserBg" resultMap="BaseResultMap">
+    select * from userbudget where username=#{un}
+  </select>
 </mapper>

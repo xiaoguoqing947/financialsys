@@ -36,4 +36,9 @@ public class UserBgSerImpl implements UserBgSer {
         }
         return num > 0;
     }
+
+    @Override
+    public UserBudget findUserBg(String username) {
+        return userBudgetMapper.findUserBg(username);
+    }
 }

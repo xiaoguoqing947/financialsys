@@ -17,4 +17,6 @@ public interface UserBudgetMapper {
     int updateByPrimaryKey(UserBudget record);
 
     int queryUserBgByUsername(@Param("un") String username);
+
+    UserBudget findUserBg(@Param("un") String username);
 }

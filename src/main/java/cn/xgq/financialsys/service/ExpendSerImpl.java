@@ -3,6 +3,8 @@ package cn.xgq.financialsys.service;
 import cn.xgq.financialsys.domain.Expend;
 import cn.xgq.financialsys.domain.User;
 import cn.xgq.financialsys.domain.dto.expend.UpdateExpendForm;
+import cn.xgq.financialsys.domain.vo.VoExpPieChart;
+import cn.xgq.financialsys.domain.vo.VoExpPrice;
 import cn.xgq.financialsys.domain.vo.VoExpStics;
 import cn.xgq.financialsys.mapping.ExpendMapper;
 import cn.xgq.financialsys.service.inter.ExpendSer;
@@ -84,5 +86,15 @@ public class ExpendSerImpl implements ExpendSer {
     @Override
     public List<VoExpStics> findExpStatistics(Map<String, Object> searchMap) {
         return expendMapper.findExpStatistics(searchMap);
+    }
+
+    @Override
+    public List<VoExpPieChart> findVoExpPieChartList(Map<String, Object> searchMap) {
+        return expendMapper.findVoExpPieChartList(searchMap);
+    }
+
+    @Override
+    public VoExpPrice findExpPrice(Map<String, Object> searchMap) {
+        return expendMapper.findExpPrice(searchMap);
     }
 }
