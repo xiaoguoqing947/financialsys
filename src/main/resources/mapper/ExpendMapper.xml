@@ -205,20 +205,20 @@
   <select id="findVoExpPieChartList" parameterType="map" resultType="cn.xgq.financialsys.domain.vo.VoExpPieChart">
     select a.enpend_type as expendType,b.expend_price as expendPrice from  expendtype a LEFT JOIN
         (select expend_type_id,expend_price from expend where expend_user=#{expendUser}
-     and DATE_FORMAT(expend_date,'%m')= DATE_FORMAT(now(),'%m')) b on
+     and DATE_FORMAT(expend_date,'%Y-%m')= DATE_FORMAT(now(),'%Y-%m')) b on
       a.expend_type_id=b.expend_type_id
   </select>
 
   <select id="findExpPrice"  parameterType="map" resultType="cn.xgq.financialsys.domain.vo.VoExpPrice">
     SELECT * from
                (SELECT SUM(expend_price) as totalExpPrice from expend
-                WHERE expend_user=#{expendUser} and DATE_FORMAT(expend_date,'%m')= DATE_FORMAT(now(),'%m')) a
+                WHERE expend_user=#{expendUser} and DATE_FORMAT(expend_date,'%Y-%m')= DATE_FORMAT(now(),'%Y-%m')) a
             ,
                (SELECT SUM(expend_price) as joyExpPrice from expend
-                WHERE expend_user=#{expendUser} and DATE_FORMAT(expend_date,'%m')= DATE_FORMAT(now(),'%m') and expend_type_id in(4,8)) b
+                WHERE expend_user=#{expendUser} and DATE_FORMAT(expend_date,'%Y-%m')= DATE_FORMAT(now(),'%Y-%m') and expend_type_id in(4,8)) b
             ,
                (SELECT SUM(expend_price) as shopExpPrice from expend
-                WHERE expend_user=#{expendUser} and DATE_FORMAT(expend_date,'%m')= DATE_FORMAT(now(),'%m') and expend_type_id in(2,3)) c
+                WHERE expend_user=#{expendUser} and DATE_FORMAT(expend_date,'%Y-%m')= DATE_FORMAT(now(),'%Y-%m') and expend_type_id in(2,3)) c
 
   </select>
 </mapper>

@@ -19,4 +19,6 @@ public interface UserBudgetMapper {
     int queryUserBgByUsername(@Param("un") String username);
 
     UserBudget findUserBg(@Param("un") String username);
+
+    int selectIdByUsername(@Param("un") String username);
 }

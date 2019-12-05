@@ -28,6 +28,12 @@ $(document).ready(function () {
                     $('#address').text(result.currentUser.address);
                     $('#sex').text(result.currentUser.sex);
                     $('#name').text(result.currentUser.name);
+
+                    $('#mIncTotalPrice').val(result.userBudget.mIncTotalPrice);
+                    $('#mExpMaxPrice').val(result.userBudget.mExpMaxPrice);
+                    $('#mExpSuitPrice').val(result.userBudget.mExpSuitPrice);
+                    $('#mExpJoyPrice').val(result.userBudget.mExpJoyPrice);
+                    $('#mExpShopPrice').val(result.userBudget.mExpShopPrice);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -38,4 +44,60 @@ $(document).ready(function () {
         })
     };
     initCurrentUser();
+    //修改保存
+    $("#updateSavaBtn").click(function () {
+        var updateValite = $("#updateForm").validate({
+            rules: {
+                mIncTotalPrice: {
+                    "required": true,
+                },
+                mExpMaxPrice: {
+                    "required": true
+                },
+                mExpSuitPrice: {
+                    "required": true
+                },
+                mExpJoyPrice: {
+                    "required": true
+                },
+                mExpShopPrice: {
+                    "required": true
+                }
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url: "/api/userbudget/update",
+                    type: 'post',
+                    dataType: 'JSON',
+                    beforeSend: function (xhr) {//设置请求头信息
+                        xhr.setRequestHeader("token", token);
+                    },
+                    headers: {'token': token},
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        console.log('data=' + data);
+                        if (data.success == '1') {
+                            new $.zui.Messager('修改成功!', {
+                                type: 'success',
+                                placement: 'center'
+                            }).show();
+                            queryListFun();
+                            updateValite.resetForm();
+                        } else {
+                            new $.zui.Messager(data.msg, {
+                                type: 'warning',
+                                placement: 'center'
+                            }).show();
+                        }
+                    },
+                    error: function (e) {
+                        new $.zui.Messager('系统繁忙,请稍候再试!', {
+                            type: 'warning',
+                            placement: 'center'
+                        }).show();
+                    }
+                });
+            }
+        });
+    });
 });

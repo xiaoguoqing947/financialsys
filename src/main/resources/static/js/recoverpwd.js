@@ -70,7 +70,3 @@ $("#recoverForm").validate({
         }
     }
 });
-
-$('#reback').click(function () {
-    location.href='/api/sysadmin';
-});

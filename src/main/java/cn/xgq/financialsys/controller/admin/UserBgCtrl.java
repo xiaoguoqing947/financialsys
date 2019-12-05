@@ -55,4 +55,16 @@ public class UserBgCtrl {
         return flag;
     }
 
+    @ResponseBody
+    @PostMapping("/update")
+    public Map<String,Object> updateMenu(UserBudget form, HttpServletRequest request){
+        Map<String,Object> resultMap=new HashMap<String, Object>();
+        if(ValidateMethod.isTokenCheck(request) && userBgSer.updateUserBg(form,request)){
+            resultMap.put("success","1");
+        }else{
+            resultMap.put("success","0");
+        }
+        return resultMap;
+    }
+
 }

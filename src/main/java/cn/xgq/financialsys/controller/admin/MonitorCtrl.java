@@ -2,8 +2,10 @@ package cn.xgq.financialsys.controller.admin;
 
 import cn.xgq.financialsys.domain.Menu;
 import cn.xgq.financialsys.domain.User;
+import cn.xgq.financialsys.domain.UserBudget;
 import cn.xgq.financialsys.enums.MessageMeta;
 import cn.xgq.financialsys.service.inter.MenuSer;
+import cn.xgq.financialsys.service.inter.UserBgSer;
 import cn.xgq.financialsys.service.inter.UserSer;
 import cn.xgq.financialsys.util.ValidateMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class MonitorCtrl {
     private MenuSer menuSer;
     @Autowired
     private UserSer userSer;
+    @Autowired
+    private UserBgSer userBgSer;
 
     @GetMapping("/lockscreen")
     public String lockScreen() {
@@ -70,6 +74,8 @@ public class MonitorCtrl {
             User currentUser = userSer.findUser(user.getUsername());
             resultMap.put("currentUser", currentUser);
             resultMap.put("status", "success");
+            UserBudget userBudget=userBgSer.findUserBg(currentUser.getUsername());
+            resultMap.put("userBudget", userBudget);
         }else{
             resultMap.put("status", "fail");
         }

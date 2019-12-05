@@ -52,36 +52,6 @@
                 </div>
                 <!-- /.card -->
 
-                <!-- About Me Box -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">关于我</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> 本月剩余支出金额</strong>
-
-                        <p class="text-muted">
-                            20000.00￥
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> 位置</strong>
-
-                        <p class="text-muted">福建, 福州</p>
-
-                        <hr>
-
-                        <strong><i class="fas fa-pencil-alt mr-1"></i>记事本</strong>
-                        <hr>
-                        <strong><i class="far fa-file-alt mr-1"></i> 个人名言</strong>
-
-                        <p class="text-muted">对于个人来讲，我没有远大的理想，我思考的是这两、三年要干什么，如何干，才
-                            能活下去。我非常重视近期的管理进步，而不是远期的战略目标。活下去，永远是硬道理。</p>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
                 <!-- /.card -->
             </div>
             <!-- /.col -->
@@ -229,40 +199,45 @@
                             </div>
 
                             <div class="tab-pane" id="alertMes">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" id="updateForm">
                                     <div class="form-group row">
                                         <label for="mIncTotalPrice" class="col-sm-2 col-form-label">月总工资</label>
-                                        <div class="col-sm-10">
+                                        <div class="input-group col-sm-10">
                                             <input class="form-control" id="mIncTotalPrice" name="mIncTotalPrice" type="text" placeholder="即：每月给自己的总收入">
+                                            <span class="input-group-addon">.00$</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class=" form-group row">
                                         <label for="mExpMaxPrice" class="col-sm-2 col-form-label">月最大消费金额</label>
-                                        <div class="col-sm-10">
+                                        <div class=" input-group col-sm-10">
                                             <input class="form-control" id="mExpMaxPrice" name="mExpMaxPrice" type="text" placeholder="即：月支出最大不可超过这个数额">
+                                            <span class="input-group-addon">.00$</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class= " form-group row">
                                         <label for="mExpSuitPrice" class="col-sm-2 col-form-label">月常规消费金额</label>
-                                        <div class="col-sm-10">
+                                        <div class=" input-group col-sm-10">
                                             <input class="form-control" id="mExpSuitPrice" name="mExpSuitPrice" type="text" placeholder="即：每月自己最好的消费金额">
+                                            <span class="input-group-addon">.00$</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="  form-group row">
                                         <label for="mExpJoyPrice" class="col-sm-2 col-form-label">月娱乐消费金额</label>
-                                        <div class="col-sm-10">
+                                        <div class="input-group col-sm-10">
                                             <input class="form-control" id="mExpJoyPrice" name="mExpJoyPrice" type="text" placeholder="即：每月给自己娱乐消费的金额">
+                                            <span class="input-group-addon">.00$</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class=" form-group row">
                                         <label for="mExpShopPrice" class="col-sm-2 col-form-label">月购物消费金额</label>
-                                        <div class="col-sm-10">
+                                        <div class="input-group col-sm-10">
                                             <input class="form-control" id="mExpShopPrice" name="mExpShopPrice" type="text" placeholder="即：每月给自己购物消费的金额">
+                                            <span class="input-group-addon">.00$</span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">保存信息</button>
+                                            <button type="submit" class="btn btn-danger" id="updateSavaBtn">保存信息</button>
                                         </div>
                                     </div>
                                 </form>
