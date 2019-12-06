@@ -152,47 +152,48 @@
                             <!-- /.tab-pane -->
 
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" id="updatePerSonForm" enctype="multipart/form-data" method="post">
                                     <div class="form-group row">
                                         <label for="inputName" class="col-sm-2 col-form-label">头像</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inptName" placeholder="头像">
+                                            <img src="/img/user4.jpg" id="inputPicHead" width="128" height="128">
+                                            <input type="file" name="file" id="file"  style="opacity:0;width:100%;height:100%;position:absolute;top:0;left:0">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputName" class="col-sm-2 col-form-label">姓名</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="如：张三">
+                                            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="如：张三">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputEmail" class="col-sm-2 col-form-label">性别</label>
+                                        <label for="inputSex" class="col-sm-2 col-form-label">性别</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="性别">
+                                            <input type="text" class="form-control" id="inputSex" name="inputSex" placeholder="性别">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputName2" class="col-sm-2 col-form-label">联系电话</label>
+                                        <label for="inputNumber" class="col-sm-2 col-form-label">联系电话</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName2" placeholder="联系电话">
+                                            <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="联系电话">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputExperience" class="col-sm-2 col-form-label">家庭地址</label>
+                                        <label for="inputAddress" class="col-sm-2 col-form-label">家庭地址</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience"
+                                            <textarea class="form-control" id="inputAddress" name="inputAddress"
                                                       placeholder="家庭地址"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputSkills" class="col-sm-2 col-form-label">出生日期</label>
+                                        <label for="inputBorn" class="col-sm-2 col-form-label">出生日期</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills" placeholder="出生日期">
+                                            <input type="text" class="form-control" id="inputBorn" name="inputBorn" placeholder="出生日期" readonly="readonly">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">保存信息</button>
+                                            <button type="submit" class="btn btn-danger" id="savePersonBtn">保存信息</button>
                                         </div>
                                     </div>
                                 </form>

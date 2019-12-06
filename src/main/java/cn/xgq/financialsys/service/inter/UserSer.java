@@ -33,4 +33,6 @@ public interface UserSer {
     boolean deleteUser(String username);
 
     User findUser(String username);
+
+    boolean updateUser(User user);
 }

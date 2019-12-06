@@ -110,4 +110,15 @@ public class UserSerImpl implements UserSer {
     public User findUser(String username) {
         return userMapper.queryUserByUsername(username);
     }
+
+    @Override
+    public boolean updateUser(User user) {
+        int num = 0;
+        try {
+            num = userMapper.updateByPrimaryKeySelective(user);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return num > 0;
+    }
 }

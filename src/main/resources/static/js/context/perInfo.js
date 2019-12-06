@@ -1,3 +1,13 @@
+$("#inputBorn").datetimepicker(
+    {
+        language: "zh-CN",
+        weekStart: 1,
+        autoclose: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        format: "yyyy年mm月ss日"
+    });
 $(document).ready(function () {
     var token = $.zui.store.get("token");//Token值
     var initCurrentUser = function () {
@@ -28,6 +38,13 @@ $(document).ready(function () {
                     $('#address').text(result.currentUser.address);
                     $('#sex').text(result.currentUser.sex);
                     $('#name').text(result.currentUser.name);
+
+                    $('#inputPicHead').attr("src", result.currentUser.pic);
+                    $('#inputName').val(result.currentUser.name);
+                    $('#inputBorn').val(result.currentUser.born);
+                    $('#inputAddress').val(result.currentUser.address);
+                    $('#inputSex').val(result.currentUser.sex);
+                    $('#inputNumber').val(result.currentUser.contactNumber);
 
                     $('#mIncTotalPrice').val(result.userBudget.mIncTotalPrice);
                     $('#mExpMaxPrice').val(result.userBudget.mExpMaxPrice);
@@ -81,9 +98,71 @@ $(document).ready(function () {
                                 type: 'success',
                                 placement: 'center'
                             }).show();
-                            queryListFun();
                             updateValite.resetForm();
                         } else {
+                            new $.zui.Messager(data.msg, {
+                                type: 'warning',
+                                placement: 'center'
+                            }).show();
+                        }
+                    },
+                    error: function (e) {
+                        new $.zui.Messager('系统繁忙,请稍候再试!', {
+                            type: 'warning',
+                            placement: 'center'
+                        }).show();
+                    }
+                });
+            }
+        });
+    });
+    $("#savePersonBtn").click(function () {
+        var updateValite = $("#updatePerSonForm").validate({
+            rules: {
+                file:{
+                  "required":true
+                },
+                inputName: {
+                    "required": true
+                },
+                inputSex: {
+                    "required": true
+                },
+                inputNumber: {
+                    "required": true
+                },
+                inputAddress: {
+                    "required": true
+                },
+                inputBorn: {
+                    "required": true
+                }
+            },
+            submitHandler: function (form) {
+                var formdata = new FormData(form);
+                $.ajax({
+                    url: "/api/file/upload/uploadimg",
+                    type: 'post',
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'JSON',
+                    beforeSend: function (xhr) {//设置请求头信息
+                        xhr.setRequestHeader("token", token);
+                    },
+                    headers: {'token': token},
+                    data: formdata,
+                    success: function (data) {
+                        console.log('data=' + data);
+                        if (data.code == 200) {
+                            new $.zui.Messager('修改成功!', {
+                                type: 'success',
+                                placement: 'center'
+                            }).show();
+                            updateValite.resetForm();
+                            window.location.href = "/api/admin";
+                        }else if(data.code == 500){
                             new $.zui.Messager(data.msg, {
                                 type: 'warning',
                                 placement: 'center'
