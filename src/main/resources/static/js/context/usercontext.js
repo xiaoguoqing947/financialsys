@@ -134,6 +134,18 @@ $(document).ready(function () {
         },
         success: function (result) {
             console.log(result.pieChart);
+            /*数据警告提示框*/
+            if(result.dataTable.incTotalPriceRate > 1.0){
+                toastr.error('该月收入金额已透支！');
+            }else if(result.dataTable.expMaxPriceRate > 1.0 && result.dataTable.expSuitPriceRate > 1.0){
+                toastr.error('该月预期最大消费金额已超出！');
+            }else if(result.dataTable.expSuitPriceRate > 1.0 && result.dataTable.expMaxPriceRate < 1.0){
+                toastr.error('该月预期消费金额已超出！');
+            }else if(result.dataTable.expMaxPriceRate > 0.2){
+                toastr.warning('该月支出金额已经超过限定的50%了，请注意留意！');
+            }else if(result.dataTable.incTotalPriceRate < 0.2){
+                toastr.warning('该月所剩金额只剩下20%不到了，请注意留意！');
+            }
             var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
             var pieData = {
                 labels: result.pieChart.labels,

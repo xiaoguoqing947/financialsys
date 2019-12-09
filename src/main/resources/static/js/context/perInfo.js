@@ -1,3 +1,74 @@
+$(function () {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    });
+    $('.icon-trash').bind('click', function () {
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your imaginary file is safe :)',
+                    'error'
+                )
+            }
+        })
+    });
+    $('.fa-edit').bind('click', function () {
+        Swal.fire({
+            title: '请记录下你的所想所做',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'OK',
+            showLoaderOnConfirm: true,
+            preConfirm: (login) => {
+                return fetch(`//api.github.com/users/${login}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(
+                            `Request failed: ${error}`
+                        )
+                    })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    title: `${result.value.login}'s avatar`,
+                    imageUrl: result.value.avatar_url
+                })
+            }
+        })
+    })
+});
 $("#inputBorn").datetimepicker(
     {
         language: "zh-CN",
@@ -12,7 +83,7 @@ $(document).ready(function () {
     var token = $.zui.store.get("token");//Token值
     var initCurrentUser = function () {
         $.ajax({
-            url:'/api/monitor/queryCurrentUser',
+            url: '/api/monitor/queryCurrentUser',
             contentType: "application/json;charset=UTF-8",
             type: 'post',
             dataType: 'JSON',
@@ -24,12 +95,12 @@ $(document).ready(function () {
                 "token": token
             },
             success: function (result) {
-                if(result.status == 'success'){
+                if (result.status == 'success') {
                     if (result.currentUser.sex == '0') {
                         result.currentUser.sex = '男';
-                    } else if(result.currentUser.sex == '1'){
+                    } else if (result.currentUser.sex == '1') {
                         result.currentUser.sex = '女';
-                    }else{
+                    } else {
                         result.currentUser.sex = '#';
                     }
                     $('#headPic').attr("src", result.currentUser.pic);
@@ -119,8 +190,8 @@ $(document).ready(function () {
     $("#savePersonBtn").click(function () {
         var updateValite = $("#updatePerSonForm").validate({
             rules: {
-                file:{
-                  "required":true
+                file: {
+                    "required": true
                 },
                 inputName: {
                     "required": true
@@ -162,7 +233,7 @@ $(document).ready(function () {
                             }).show();
                             updateValite.resetForm();
                             window.location.href = "/api/admin";
-                        }else if(data.code == 500){
+                        } else if (data.code == 500) {
                             new $.zui.Messager(data.msg, {
                                 type: 'warning',
                                 placement: 'center'
