@@ -80,10 +80,12 @@ $(document).ready(function () {
             if (result.IsHasData == 'no') {
                 $('#addModal').modal('show', 'fit');
             } else {
-                new $.zui.Messager('欢迎您进入系统，希望今天的你比昨天更快乐！', {
-                    type: 'success', // 定义颜色主题
-                    placement: 'center' // 定义显示位置
-                }).show();
+                const  Toast = Swal.fire({
+                    title: 'Welcome!',
+                    text: '今天的你比昨天更努力',
+                    type: 'success',
+                    showConfirmButton : false
+                });
             }
         },
         error: function () {

@@ -1,3 +1,124 @@
+function incomeAddInit() {
+    var token = $.zui.store.get("token");//Token值
+    var url = "/api/income/initAdd";
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'JSON',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("token", token);
+        },
+        headers: {
+            Accept: "application/json; charset=utf-8",
+            "token": token
+        },
+        success: function (result) {
+            if (result.dataIncT.length != 0) {
+                $("#incomeTypeId").empty();
+                $.each(result.dataIncT, function (i, item) {
+                    $("#incomeTypeId").append("<option value='" + item.incomeTypeId + "'>" + item.incomeType + "</option>");
+                });
+            }
+            if (result.dataDic.length != 0) {
+                $("#payMethod").empty();
+                $.each(result.dataDic, function (i, item) {
+                    $("#payMethod").append("<option value='" + item.keyValue + "'>" + item.keyName + "</option>");
+                });
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("jqXHR.responseText=" + jqXHR.responseText);
+            alert("jqXHR.statusText=" + jqXHR.statusText);
+            alert("jqXHR.status=" + jqXHR.status)
+        }
+    });
+}
+function expendAddInit() {
+    var url = "/api/expend/initAdd";
+    var token = $.zui.store.get("token");//Token值
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'JSON',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("token", token);
+        },
+        headers: {
+            Accept: "application/json; charset=utf-8",
+            "token": token
+        },
+        success: function (result) {
+            if (result.dataExpT.length != 0) {
+                $("#expendTypeId").empty();
+                $.each(result.dataExpT, function (i, item) {
+                    $("#expendTypeId").append("<option value='" + item.expendTypeId + "'>" + item.enpendType + "</option>");
+                });
+            }
+            if (result.dataDic.length != 0) {
+                $("#payExpMethod").empty();
+                $.each(result.dataDic, function (i, item) {
+                    $("#payExpMethod").append("<option value='" + item.keyValue + "'>" + item.keyName + "</option>");
+                });
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("jqXHR.responseText=" + jqXHR.responseText);
+            alert("jqXHR.statusText=" + jqXHR.statusText);
+            alert("jqXHR.status=" + jqXHR.status)
+        }
+    });
+}
+$(function(){
+    let timerInterval
+    Swal.fire({
+        title: '今天你记账了吗!',
+        html:
+            '即将在 <strong></strong> 秒内自动关闭.<br/><br/>' +
+            '<button id="increase" class="btn btn-warning">' +
+            '请再给我5秒钟!' +
+            '</button><br/><br/>' +
+            '<button id="expend" class="btn btn-danger" data-toggle="modal" data-target="#addExpendModal">' +
+            '支出记账！' +
+            '</button><br/><br/>' +
+            '<button id="income" class="btn btn-success" data-toggle="modal" data-target="#addIncomeModal">' +
+            '收入记账 !' +
+            '</button><br/>',
+        timer: 10000,
+        onBeforeOpen: () => {
+            const content = Swal.getContent()
+            const $ = content.querySelector.bind(content)
+
+            const expend = $('#expend')
+            const income = $('#income')
+            const increase = $('#increase')
+
+            Swal.showLoading();
+
+            expend.addEventListener('click', () => {
+                expendAddInit();
+                Swal.close();
+            })
+
+            income.addEventListener('click', () => {
+                incomeAddInit();
+                Swal.close();
+            })
+
+            increase.addEventListener('click', () => {
+                Swal.increaseTimer(5000)
+            })
+
+            timerInterval = setInterval(() => {
+                Swal.getContent().querySelector('strong')
+                    .textContent = (Swal.getTimerLeft() / 1000)
+                    .toFixed(0)
+            }, 100)
+        },
+        onClose: () => {
+            clearInterval(timerInterval)
+        }
+    })
+});
 $(document).ready(function () {
     var token = $.zui.store.get("token");//Token值
     $.ajax({
@@ -163,6 +284,130 @@ $(document).ready(function () {
             alert("jqXHR.statusText=" + jqXHR.statusText);
             alert("jqXHR.status=" + jqXHR.status)
         }
+    });
+    /*收入添加*/
+    $("#addSaveBtn").click(function () {
+        var validator = $("#addForm").validate({
+            rules: {
+                incomeTypeId: {
+                    "required": true,
+                },
+                incomePrice: {
+                    "required": true
+                },
+                incomeSource: {
+                    "required": true
+                },
+                payAccount: {
+                    "required": true
+                },
+                incomeDesc: {
+                    "required": true
+                },
+                payMethod: {
+                    "required": true
+                }
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url: "/api/income/add",
+                    type: 'post',
+                    dataType: 'JSON',
+                    beforeSend: function (xhr) {//设置请求头信息
+                        xhr.setRequestHeader("token", token);
+                    },
+                    headers: {
+                        Accept: "application/json; charset=utf-8",
+                        "token": token
+                    },
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data) {
+                            new $.zui.Messager('添加成功!', {
+                                type: 'success',
+                                placement: 'center'
+                            }).show();
+                            $('#incomePrice').val('');
+                            $('#incomeSource').val('');
+                            $('#payAccount').val('');
+                            $('#incomeDesc').val('');
+                            $('#addIncomeModal').modal('hide', 'fit');
+                            validator.resetForm();
+                        } else {
+                            new $.zui.Messager("添加失败", {
+                                type: 'warning',
+                                placement: 'center'
+                            }).show();
+                        }
+                    },
+                    error: function (e) {
+                        new $.zui.Messager('系统繁忙,请稍候再试!', {
+                            type: 'warning',
+                            placement: 'center'
+                        }).show();
+                    }
+                });
+            }
+        });
+    });
+    //支出添加保存
+    $("#addExpSaveBtn").click(function () {
+        var validator = $("#addExpendForm").validate({
+            rules: {
+                expendPrice: {
+                    "required": true
+                },
+                expendUse: {
+                    "required": true
+                },
+                payAccount: {
+                    "required": true
+                },
+                expendDesc: {
+                    "required": true
+                }
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url: "/api/expend/add",
+                    type: 'post',
+                    dataType: 'JSON',
+                    beforeSend: function (xhr) {//设置请求头信息
+                        xhr.setRequestHeader("token", token);
+                    },
+                    headers: {
+                        Accept: "application/json; charset=utf-8",
+                        "token": token
+                    },
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data) {
+                            new $.zui.Messager('添加成功!', {
+                                type: 'success',
+                                placement: 'center'
+                            }).show();
+                            $('#incomePrice').val('');
+                            $('#incomeSource').val('');
+                            $('#payAccount').val('');
+                            $('#incomeDesc').val('');
+                            $('#addExpendModal').modal('hide', 'fit');
+                            validator.resetForm();
+                        } else {
+                            new $.zui.Messager("添加失败", {
+                                type: 'warning',
+                                placement: 'center'
+                            }).show();
+                        }
+                    },
+                    error: function (e) {
+                        new $.zui.Messager('系统繁忙,请稍候再试!', {
+                            type: 'warning',
+                            placement: 'center'
+                        }).show();
+                    }
+                });
+            }
+        });
     });
 })
 

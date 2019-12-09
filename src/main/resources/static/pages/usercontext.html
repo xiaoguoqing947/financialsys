@@ -149,4 +149,130 @@
         <!-- /.col -->
     </div>
 </section>
+<!-- 支出添加页面 -->
+<div class="modal fade" id="addExpendModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">支出记账</h4>
+            </div>
+            <form id="addExpendForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="expendTypeId" class="col-sm-3 control-label">支出类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="expendTypeId" name="expendTypeId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expendPrice" class="col-sm-3 control-label">支出金额:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="expendPrice" name="expendPrice" type="text">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payMethod" class="col-sm-3 control-label">支出方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="payExpMethod" name="payMethod">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expendUse" class="col-sm-3 control-label">支出用途:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="expendUse" name="expendUse" type="text" placeholder="即：父亲，上司，公司，朋友">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payAccount" class="col-sm-3 control-label">支出账户:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="payAccount" name="payAccount" type="text">
+                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expendDesc" class="col-sm-3 control-label">支出描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="expendDesc" name="expendDesc" rows="6" cols="60"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="addExpSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 收入添加页面 -->
+<div class="modal fade" id="addIncomeModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">收入记账</h4>
+            </div>
+            <form id="addForm">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="incomeTypeId" class="col-sm-3 control-label">收入类型:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="incomeTypeId" name="incomeTypeId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomePrice" class="col-sm-3 control-label">收入金额:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="incomePrice" name="incomePrice" type="text">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payMethod" class="col-sm-3 control-label">收款方式:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="payMethod" name="payMethod">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeSource" class="col-sm-3 control-label">收入来源:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="incomeSource" name="incomeSource" type="text" placeholder="即：父亲，上司，公司，朋友">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="payAccount" class="col-sm-3 control-label">收入账户:<font color="red">*</font></label>
+                            <div class="input-group col-sm-9">
+                                <input class="form-control" id="payAccount" name="payAccount" type="text">
+                                <span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeDesc" class="col-sm-3 control-label">收入描述:<font color="red">*</font></label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="incomeDesc" name="incomeDesc" rows="6" cols="60"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="center-block">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="addSaveBtn" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script src="/js/context/usercontext.js"></script>

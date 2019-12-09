@@ -22,7 +22,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-   /* @Bean
+/*    @Bean
     MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory factory=new MultipartConfigFactory();
         factory.setLocation("E:/JAVACODE/financialsys/src/main/resources");
