@@ -1,79 +1,109 @@
 $(function () {
     var token = $.zui.store.get("token");//Token值
-    $.ajax({
-        url: '/api/bookmark/queryList',
-        contentType: "application/json;charset=UTF-8",
-        type: 'post',
-        dataType: 'JSON',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("token", token);
-        },
-        headers: {
-            Accept: "application/json; charset=utf-8",
-            "token": token
-        },
-        success: function (result) {
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("jqXHR.responseText=" + jqXHR.responseText);
-            alert("jqXHR.statusText=" + jqXHR.statusText);
-            alert("jqXHR.status=" + jqXHR.status)
-        }
-    })
-    var html='';
-    for(var i=0;i<5;i++){
-        html+='<li>\n' +
-            '                                                <!-- checkbox -->\n' +
-            '                                                <div  class="icheck-primary d-inline ml-2">\n' +
-            '                                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">\n' +
-            '                                                    <label for="todoCheck1"></label>\n' +
-            '                                                </div>\n' +
-            '                                                <span class="text">我记录的第一个日志</span>\n' +
-            '                                                <!-- Emphasis label -->\n' +
-            '                                                <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>\n' +
-            '                                                <!-- General tools such as edit or delete-->\n' +
-            '                                                <div class="tools">\n' +
-            '                                                    <i class="fas fa-edit"></i>\n' +
-            '                                                    <i class="fas icon-trash"></i>\n' +
-            '                                                </div>\n' +
-            '                                            </li>';
-    }
-    $('#listBookMarks').html(html);
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-    });
-    $('.icon-trash').bind('click', function () {
-        swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.value) {
-                swalWithBootstrapButtons.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire(
-                    'Cancelled',
-                    'Your imaginary file is safe :)',
-                    'error'
-                )
+    function getTimeAgo(period) {
+        var d = new Date();
+        var yearLevelValue = d.getFullYear();
+        var monthLevelValue = change(d.getMonth() + 1);
+        var dayLevelValue = change(d.getDate());
+        var hourLevelValue = change(d.getHours());
+        var minuteLevelValue = change(d.getMinutes());
+        var secondLevelValue = change(d.getSeconds());
+
+        period = new Date(period);
+        var year = period.getFullYear();
+        var month = change(period.getMonth() + 1);
+        var day = change(period.getDate());
+        var hour = change(period.getHours());
+        var minute = change(period.getMinutes());
+        var second = change(period.getSeconds());
+
+        function change(t) {
+            if (t < 10) {
+                return "0" + t;
+            } else {
+                return t;
             }
-        })
-    });
+        }
+
+        /*    console.log(yearLevelValue+'-'+monthLevelValue+'-'+dayLevelValue+'' +
+                ' '+hourLevelValue+':'+minuteLevelValue+':'+secondLevelValue)
+            console.log(year+'-'+month+'-'+day+'' +
+                ' '+hour+':'+minute+':'+second)*/
+
+        year = yearLevelValue - year;
+        month = monthLevelValue - month;
+        day = dayLevelValue - day;
+        hour = hourLevelValue - hour;
+        minute = minuteLevelValue - minute;
+        second = secondLevelValue - second;
+
+        if (year > 0) {
+            year = (year == 1) ? year + ' year' : year + ' years';
+            return '<small class="badge badge-danger"><i class="far fa-clock"></i>' + year + '</small>';
+        } else if (month > 0) {
+            month = (month == 1) ? month + ' month' : month + ' months';
+            return '<small class="badge badge-warning"><i class="far fa-clock"></i>' + month + '</small>';
+        } else if (day > 0) {
+            day = (day == 1) ? day + ' day' : day + ' days';
+            return '<small class="badge badge-info"><i class="far fa-clock"></i>' + day + '</small>';
+        } else if (hour > 0) {
+            hour = (hour == 1) ? hour + ' hour' : hour + ' hours';
+            return '<small class="badge badge-success"><i class="far fa-clock"></i>' + hour + '</small>';
+
+        } else if (minute > 0) {
+            minute = (minute == 1) ? minute + ' minute' : minute + ' minutes';
+            return '<small class="badge badge-secondary"><i class="far fa-clock"></i>' + minute + '</small>';
+        } else if (second > 0) {
+            second = second + ' s';
+            return '<small class="badge badge-danger"><i class="far fa-clock"></i>' + second + '</small>';
+        }else if (second == 0) {
+            return '<small class="badge badge-danger"><i class="far fa-clock"></i>1 s</small>';
+        }
+    }
+    var initItemPage = function () {
+        $.ajax({
+            url: '/api/bookmark/queryList',
+            contentType: "application/json;charset=UTF-8",
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("token", token);
+            },
+            headers: {
+                Accept: "application/json; charset=utf-8",
+                "token": token
+            },
+            success: function (result) {
+                console.log(result.bMarkList);
+                var html = '';
+                for (var i = 0; i < result.bMarkList.length; i++) {
+                    var timeHtml = getTimeAgo((result.bMarkList[i].oprTime));
+                    html += '<li>\n' +
+                        '                                                <!-- checkbox -->\n' +
+                        '                                                <div  class="icheck-primary d-inline ml-2">\n' +
+                        '                                                    <input type="checkbox" value="' + result.bMarkList[i].id + '" name="todo' + result.bMarkList[i].id + '" id="todo' + result.bMarkList[i].id + '">\n' +
+                        '                                                    <label for="todo' + result.bMarkList[i].id + '"></label>\n' +
+                        '                                                </div>\n' +
+                        '                                                <span class="text">' + result.bMarkList[i].title + '</span>\n' +
+                        '                                                <!-- Emphasis label -->\n';
+                    html += timeHtml +
+                        '                                                <!-- General tools such as edit or delete-->\n' +
+                        '                                                <div class="tools">\n' +
+                        '                                                    <i class="fas fa-edit"></i>\n' +
+                        '                                                    <i class="fas icon-trash"></i>\n' +
+                        '                                                </div>\n' +
+                        '                                            </li>';
+                }
+                $('#listBookMarks').html(html);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("jqXHR.responseText=" + jqXHR.responseText);
+                alert("jqXHR.statusText=" + jqXHR.statusText);
+                alert("jqXHR.status=" + jqXHR.status)
+            }
+        });
+    };
+    initItemPage();
     $('#addList').bind('click', function () {
         Swal.fire({
             title: '请记录下你的所想所做',
@@ -83,28 +113,42 @@ $(function () {
             },
             showCancelButton: true,
             confirmButtonText: 'OK',
-            showLoaderOnConfirm: true,
-            preConfirm: (login) => {
-                return fetch(`//api.github.com/users/${login}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(response.statusText)
-                        }
-                        return response.json()
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Request failed: ${error}`
-                        )
-                    })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    title: `${result.value.login}'s avatar`,
-                    imageUrl: result.value.avatar_url
+            console.log(result);
+            if (result.value != '') {
+                $.ajax({
+                    url: "/api/bookmark/add",
+                    type: 'POST',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("token", token);
+                    },
+                    headers: {
+                        Accept: "application/json; charset=utf-8",
+                        "token": token
+                    },
+                    data: {
+                        "title": result.value
+                    },
+                    success: function (result) {
+                        if (result) {
+                            console.log('标签写入成功！');
+                            initItemPage();
+                        } else {
+                            Swal.fire(
+                                'Warning!',
+                                '添加失败',
+                                'error'
+                            )
+                        }
+                    }
+
                 })
+            } else {
+                Swal.fire(
+                    'Warning!',
+                    '输入内容不能为空！，请重新选择',
+                    'warning'
+                )
             }
         })
     })

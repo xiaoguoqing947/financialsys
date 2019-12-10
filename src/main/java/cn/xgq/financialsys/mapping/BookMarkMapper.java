@@ -1,6 +1,7 @@
 package cn.xgq.financialsys.mapping;
 
 import cn.xgq.financialsys.domain.BookMark;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface BookMarkMapper {
 
     int updateByPrimaryKey(BookMark record);
 
-    List<BookMark> findList();
+    List<BookMark> findList(@Param("un") String username);
 }

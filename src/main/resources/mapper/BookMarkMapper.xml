@@ -81,6 +81,6 @@
   </update>
 
   <select id="findList" resultMap="BaseResultMap">
-    select * from bookmark
+    select * from bookmark where username=#{un} order by opr_time    desc
   </select>
 </mapper>

@@ -5,5 +5,7 @@ import cn.xgq.financialsys.domain.BookMark;
 import java.util.List;
 
 public interface BookMarkSer {
-    List<BookMark> findList();
+    List<BookMark> findList(String username);
+
+    boolean addBookMark(BookMark bookMark);
 }
