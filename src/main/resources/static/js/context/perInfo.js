@@ -1,4 +1,44 @@
 $(function () {
+    var token = $.zui.store.get("token");//Token值
+    $.ajax({
+        url: '/api/bookmark/queryList',
+        contentType: "application/json;charset=UTF-8",
+        type: 'post',
+        dataType: 'JSON',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("token", token);
+        },
+        headers: {
+            Accept: "application/json; charset=utf-8",
+            "token": token
+        },
+        success: function (result) {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("jqXHR.responseText=" + jqXHR.responseText);
+            alert("jqXHR.statusText=" + jqXHR.statusText);
+            alert("jqXHR.status=" + jqXHR.status)
+        }
+    })
+    var html='';
+    for(var i=0;i<5;i++){
+        html+='<li>\n' +
+            '                                                <!-- checkbox -->\n' +
+            '                                                <div  class="icheck-primary d-inline ml-2">\n' +
+            '                                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">\n' +
+            '                                                    <label for="todoCheck1"></label>\n' +
+            '                                                </div>\n' +
+            '                                                <span class="text">我记录的第一个日志</span>\n' +
+            '                                                <!-- Emphasis label -->\n' +
+            '                                                <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>\n' +
+            '                                                <!-- General tools such as edit or delete-->\n' +
+            '                                                <div class="tools">\n' +
+            '                                                    <i class="fas fa-edit"></i>\n' +
+            '                                                    <i class="fas icon-trash"></i>\n' +
+            '                                                </div>\n' +
+            '                                            </li>';
+    }
+    $('#listBookMarks').html(html);
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success',
@@ -34,7 +74,7 @@ $(function () {
             }
         })
     });
-    $('.fa-edit').bind('click', function () {
+    $('#addList').bind('click', function () {
         Swal.fire({
             title: '请记录下你的所想所做',
             input: 'text',

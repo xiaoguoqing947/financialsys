@@ -37,7 +37,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="userbudget" domainObjectName="UserBudget" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="bookmark" domainObjectName="BookMark" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
     </context>

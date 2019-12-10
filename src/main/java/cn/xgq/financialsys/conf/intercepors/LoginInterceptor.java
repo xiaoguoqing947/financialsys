@@ -21,7 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         User user = (User) session.getAttribute("admin");
         if (user == null) {
             response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().append("<script>alert('请登录后重试!');location.href='/';</script>");
+            response.getWriter().append("<script>location.href='/';</script>");
             return false;//用户未登录，进行拦截
         } else {
             return true;//用户一登录，放行拦截
