@@ -115,7 +115,7 @@ $(function () {
                         cancelButtonText: 'No, cancel!',
                         reverseButtons: true
                     }).then((result) => {
-                        console.log(result)
+                        console.log(result);
                         if (result.value) {
                             $.ajax({
                                 url: "/api/bookmark/delete",
@@ -131,14 +131,14 @@ $(function () {
                                     "id": id
                                 },
                                 success: function (result) {
-                                    if(result.success == 1){
+                                    if (result.success == 1) {
                                         swalWithBootstrapButtons.fire(
                                             'Deleted!',
                                             '删除成功！',
                                             'success'
                                         );
                                         initItemPage();
-                                    }else {
+                                    } else {
                                         swalWithBootstrapButtons.fire(
                                             'Deleted!',
                                             'Your file  deleted fail.',
@@ -171,7 +171,7 @@ $(function () {
                         confirmButtonText: 'OK',
                     }).then((result) => {
                         console.log(result);
-                        if (result.value != '') {
+                        if (result.value) {
                             $.ajax({
                                 url: "/api/bookmark/update",
                                 type: 'POST',
@@ -184,7 +184,7 @@ $(function () {
                                 },
                                 data: {
                                     "title": result.value,
-                                    "id":id
+                                    "id": id
                                 },
                                 success: function (result) {
                                     if (result) {
@@ -200,11 +200,13 @@ $(function () {
                                 }
 
                             })
-                        } else {
-                            Swal.fire(
-                                'Warning!',
-                                '输入内容不能为空！，请重新选择',
-                                'warning'
+                        } else if (
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire(
+                                'Cancelled',
+                                '您已取消了修改操作!',
+                                'error'
                             )
                         }
                     })
