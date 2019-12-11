@@ -31,4 +31,26 @@ public class BookMarkSerImpl implements BookMarkSer {
         }
         return num > 0;
     }
+
+    @Override
+    public boolean deleteBookMark(String id) {
+        int num = 0;
+        try {
+            num = bookMarkMapper.deleteByPrimaryKey(Integer.parseInt(id));
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return num > 0;
+    }
+
+    @Override
+    public boolean updateBookMark(BookMark bookMark) {
+        int num = 0;
+        try {
+            num = bookMarkMapper.updateByPrimaryKeySelective(bookMark);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return num > 0;
+    }
 }

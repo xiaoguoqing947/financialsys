@@ -8,4 +8,8 @@ public interface BookMarkSer {
     List<BookMark> findList(String username);
 
     boolean addBookMark(BookMark bookMark);
+
+    boolean deleteBookMark(String id);
+
+    boolean updateBookMark(BookMark bookMark);
 }

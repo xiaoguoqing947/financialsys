@@ -49,4 +49,34 @@ public class BookMarkCtrl {
         }
         return flag;
     }
+
+    @ResponseBody
+    @PostMapping("/delete")
+    public Map<String,Object> deleteMenu(@RequestParam("id") String id,HttpServletRequest request){
+        Map<String,Object> resultMap=new HashMap<String, Object>();
+        if(ValidateMethod.isTokenCheck(request) && bookMarkSer.deleteBookMark(id)){
+            resultMap.put("success","1");
+        }else{
+            resultMap.put("success","0");
+        }
+        return resultMap;
+    }
+
+    @ResponseBody
+    @PostMapping("/update")
+    public Map<String,Object> updateMenu(@RequestParam("id") String id,@RequestParam("title") String title, HttpServletRequest request){
+        Map<String,Object> resultMap=new HashMap<String, Object>();
+        BookMark bookMark=new BookMark();
+        bookMark.setOprTime(new Date());
+        bookMark.setTitle(title);
+        bookMark.setId(Integer.parseInt(id));
+        User user = (User) request.getSession().getAttribute("admin");
+        bookMark.setUsername(user.getUsername());
+        if(ValidateMethod.isTokenCheck(request) && bookMarkSer.updateBookMark(bookMark)){
+            resultMap.put("success","1");
+        }else{
+            resultMap.put("success","0");
+        }
+        return resultMap;
+    }
 }

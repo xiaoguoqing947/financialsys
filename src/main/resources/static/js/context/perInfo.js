@@ -56,10 +56,11 @@ $(function () {
         } else if (second > 0) {
             second = second + ' s';
             return '<small class="badge badge-danger"><i class="far fa-clock"></i>' + second + '</small>';
-        }else if (second == 0) {
+        } else if (second == 0) {
             return '<small class="badge badge-danger"><i class="far fa-clock"></i>1 s</small>';
         }
     }
+
     var initItemPage = function () {
         $.ajax({
             url: '/api/bookmark/queryList',
@@ -89,12 +90,125 @@ $(function () {
                     html += timeHtml +
                         '                                                <!-- General tools such as edit or delete-->\n' +
                         '                                                <div class="tools">\n' +
-                        '                                                    <i class="fas fa-edit"></i>\n' +
-                        '                                                    <i class="fas icon-trash"></i>\n' +
+                        '                                                    <i class="fas fa-edit"  id="' + result.bMarkList[i].id + '"></i>\n' +
+                        '                                                    <i class="fas icon-trash" id="' + result.bMarkList[i].id + '"></i>\n' +
                         '                                                </div>\n' +
                         '                                            </li>';
                 }
                 $('#listBookMarks').html(html);
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                });
+                /*删除按钮*/
+                $('.icon-trash').bind("click", function () {
+                    var id = $(this).prop("id");
+                    swalWithBootstrapButtons.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'No, cancel!',
+                        reverseButtons: true
+                    }).then((result) => {
+                        console.log(result)
+                        if (result.value) {
+                            $.ajax({
+                                url: "/api/bookmark/delete",
+                                type: 'POST',
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("token", token);
+                                },
+                                headers: {
+                                    Accept: "application/json; charset=utf-8",
+                                    "token": token
+                                },
+                                data: {
+                                    "id": id
+                                },
+                                success: function (result) {
+                                    if(result.success == 1){
+                                        swalWithBootstrapButtons.fire(
+                                            'Deleted!',
+                                            '删除成功！',
+                                            'success'
+                                        );
+                                        initItemPage();
+                                    }else {
+                                        swalWithBootstrapButtons.fire(
+                                            'Deleted!',
+                                            'Your file  deleted fail.',
+                                            'error'
+                                        );
+                                    }
+                                }
+                            });
+                        } else if (
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire(
+                                'Cancelled',
+                                '您已取消了删除操作!',
+                                'error'
+                            )
+                        }
+                    })
+                });
+                /*修改按钮*/
+                $('.fa-edit').bind('click', function () {
+                    var id = $(this).prop("id");
+                    Swal.fire({
+                        title: '请输入您想要重新记录的内容',
+                        input: 'text',
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        console.log(result);
+                        if (result.value != '') {
+                            $.ajax({
+                                url: "/api/bookmark/update",
+                                type: 'POST',
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("token", token);
+                                },
+                                headers: {
+                                    Accept: "application/json; charset=utf-8",
+                                    "token": token
+                                },
+                                data: {
+                                    "title": result.value,
+                                    "id":id
+                                },
+                                success: function (result) {
+                                    if (result) {
+                                        console.log('标签修改成功！');
+                                        initItemPage();
+                                    } else {
+                                        Swal.fire(
+                                            'Warning!',
+                                            '添加失败',
+                                            'error'
+                                        )
+                                    }
+                                }
+
+                            })
+                        } else {
+                            Swal.fire(
+                                'Warning!',
+                                '输入内容不能为空！，请重新选择',
+                                'warning'
+                            )
+                        }
+                    })
+                })
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("jqXHR.responseText=" + jqXHR.responseText);
