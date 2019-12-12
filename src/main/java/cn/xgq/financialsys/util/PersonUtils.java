@@ -114,6 +114,30 @@ public class PersonUtils {
     }
 
     public static VoExpDataAnalysis getExpDataAnalysis(VoExpPrice voExpPrice, UserBudget userBudget) {
+        if(voExpPrice == null && userBudget == null){
+            voExpPrice=new VoExpPrice();
+            voExpPrice.setJoyExpPrice(1);
+            voExpPrice.setShopExpPrice(1);
+            voExpPrice.setTotalExpPrice(1);
+            userBudget=new UserBudget();
+            userBudget.setmExpShopPrice((double) 1);
+            userBudget.setmExpJoyPrice((double) 1);
+            userBudget.setmExpSuitPrice((double) 1);
+            userBudget.setmExpMaxPrice((double) 1);
+            userBudget.setmIncTotalPrice((double) 1);
+        }else if(voExpPrice == null){
+            voExpPrice=new VoExpPrice();
+            voExpPrice.setJoyExpPrice(0);
+            voExpPrice.setShopExpPrice(0);
+            voExpPrice.setTotalExpPrice(0);
+        }else if(userBudget == null){
+            userBudget=new UserBudget();
+            userBudget.setmExpShopPrice((double) 1000);
+            userBudget.setmExpJoyPrice((double) 1000);
+            userBudget.setmExpSuitPrice((double) 3000);
+            userBudget.setmExpMaxPrice((double) 5000);
+            userBudget.setmIncTotalPrice((double) 10000);
+        }
         double expMaxPriceRate =divide(voExpPrice.getTotalExpPrice(),userBudget.getmExpMaxPrice());
         double expSuitPriceRate = divide(voExpPrice.getTotalExpPrice() , userBudget.getmExpSuitPrice());
         double expJoyPriceRate =divide( voExpPrice.getJoyExpPrice() , userBudget.getmExpJoyPrice());

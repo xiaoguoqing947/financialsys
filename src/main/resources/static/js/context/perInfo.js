@@ -370,6 +370,7 @@ $(document).ready(function () {
                                 placement: 'center'
                             }).show();
                             updateValite.resetForm();
+                            initCurrentUser();
                         } else {
                             new $.zui.Messager(data.msg, {
                                 type: 'warning',
