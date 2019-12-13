@@ -33,16 +33,7 @@ public class MenuSerImpl implements MenuSer {
 
     @Override
     public List<Menu> listMenu(Map<String, Object> searchMap) {
-        /*redis缓存的使用*/
-        List<Menu> list = null;
-        if (redisService.existsKey("listMenu") && valueOperations.get("listMenu")!=null) {
-            list = (List<Menu>) valueOperations.get("listMenu");
-        } else {
-            list = menuMapper.findMenuList(searchMap);
-            valueOperations.set("listMenu", list, RedisService.DEFAULT_EXPIRE, TimeUnit.SECONDS);
-        }
-//        System.out.println(list);
-        return list;
+        return menuMapper.findMenuList(searchMap);
     }
 
     @Override
@@ -110,6 +101,20 @@ public class MenuSerImpl implements MenuSer {
     @Override
     public List<VoMenu> findAllMenuIdAndName() {
         return menuMapper.findMenuIdAndName();
+    }
+
+    @Override
+    public List<Menu> findUserPagelistMenu() {
+        /*redis缓存的使用*/
+        List<Menu> list = null;
+        if (redisService.existsKey("listMenu") && valueOperations.get("listMenu") != null) {
+            list = (List<Menu>) valueOperations.get("listMenu");
+        } else {
+            list = menuMapper.findUserPagelistMenu();
+            valueOperations.set("listMenu", list, RedisService.DEFAULT_EXPIRE, TimeUnit.SECONDS);
+        }
+//        System.out.println(list);
+        return list;
     }
 
 

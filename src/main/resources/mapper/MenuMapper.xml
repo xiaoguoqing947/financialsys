@@ -162,4 +162,8 @@
   <select id="findMenuIdAndName" resultType="cn.xgq.financialsys.domain.vo.VoMenu">
         select id,name from menu where 1=1
   </select>
+
+  <select id="findUserPagelistMenu" resultMap="BaseResultMap">
+    select * from menu
+  </select>
 </mapper>

@@ -27,4 +27,6 @@ public interface MenuMapper {
     int queryMenuByName(@Param("m_name") String name);
 
     List<VoMenu> findMenuIdAndName();
+
+    List<Menu> findUserPagelistMenu();
 }

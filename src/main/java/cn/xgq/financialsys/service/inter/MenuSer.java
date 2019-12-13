@@ -58,4 +58,6 @@ public interface MenuSer {
      * @return
      */
     List<VoMenu> findAllMenuIdAndName();
+
+    List<Menu> findUserPagelistMenu();
 }

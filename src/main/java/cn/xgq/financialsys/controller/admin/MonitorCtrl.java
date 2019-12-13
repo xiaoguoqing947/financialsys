@@ -39,9 +39,8 @@ public class MonitorCtrl {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         if (ValidateMethod.isTokenCheck(request)) {
             resultMap.put("status", MessageMeta.sendSuccess.getMsg());
-            Map<String, Object> searchMap = new HashMap<String, Object>();
             List<Menu> menuList = null;
-            menuList = menuSer.listMenu(searchMap);
+            menuList = menuSer.findUserPagelistMenu();
             resultMap.put("menuList", menuList);
         } else {
             resultMap.put("status", MessageMeta.sendError.getMsg());
