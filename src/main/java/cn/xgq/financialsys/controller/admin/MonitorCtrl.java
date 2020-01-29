@@ -45,7 +45,7 @@ public class MonitorCtrl {
         } else {
             resultMap.put("status", MessageMeta.sendError.getMsg());
         }
-        System.err.println(resultMap);
+//        System.err.println(resultMap);
         return resultMap;
     }
 

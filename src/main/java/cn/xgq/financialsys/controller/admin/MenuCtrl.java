@@ -33,7 +33,7 @@ public class MenuCtrl {
         Map<String,Object> searchMap=new HashMap<String, Object>();
         List<Menu> menuList=menuSer.listMenu(searchMap);
         resultMap.put("data",menuList);
-        System.out.println(menuList);
+//        System.out.println(menuList);
         return resultMap;
     }
 

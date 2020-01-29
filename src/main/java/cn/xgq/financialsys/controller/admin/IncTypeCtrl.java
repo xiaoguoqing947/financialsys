@@ -29,7 +29,7 @@ public class IncTypeCtrl {
             List<IncomeType> incTypeList = incomeTypeSer.listIncomeType();
             resultMap.put("data", incTypeList);
             resultMap.put("status", "success");
-            System.out.println(incTypeList);
+//            System.out.println(incTypeList);
         }
         return resultMap;
     }

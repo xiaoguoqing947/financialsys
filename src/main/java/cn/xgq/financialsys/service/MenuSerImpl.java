@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -53,6 +54,7 @@ public class MenuSerImpl implements MenuSer {
     }
 
     @Override
+    @Transactional/*事务的回滚*/
     public boolean addMenu(Menu menu) {
         redisService.deleteKey("listMenu");
         int num = 0;

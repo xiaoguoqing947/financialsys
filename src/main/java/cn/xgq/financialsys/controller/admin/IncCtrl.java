@@ -78,7 +78,7 @@ public class IncCtrl {
         } else {
             resultMap.put("message", "请上传参数");
         }
-        System.out.println(incomeList);
+//        System.out.println(incomeList);
         return resultMap;
     }
 
@@ -95,7 +95,7 @@ public class IncCtrl {
             resultMap.put("dataDic", dictionarys);
             resultMap.put("dataIncT", incomeTypes);
         }
-        System.out.println(resultMap);
+//        System.out.println(resultMap);
         return resultMap;
     }
 
@@ -135,7 +135,7 @@ public class IncCtrl {
         }else {
             resultMap.put("result","fail");
         }
-        System.out.println(resultMap);
+//        System.out.println(resultMap);
         return resultMap;
     }
 

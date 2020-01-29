@@ -45,8 +45,8 @@ $(document).ready(function () {
                                     location.href = "/api/sysadmin";
                                 }
                             } else {
-                                alert('账号或密码错误，请重新输入');
-                                window.location.href = '/login?result=fail';
+                                toastr.warning('账号或密码错误，请重新输入');
+                                setTimeout('toLogin()', 1500);
                             }
                         }
                     }
@@ -76,11 +76,11 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data);
                     if (data.status == 'success') {
-                        alert("恭喜您，注册成功");
-                        window.location.href = '/login';
+                        toastr.success("恭喜您，注册成功");
+                        setTimeout('toLogin()', 1500);
                     } else if (data.status == 'fail') {
-                        alert("注册失败");
-                        window.location.href = '/register';
+                        toastr.error("注册失败");
+                        setTimeout('toRegister()', 1500);
                     }
                 }
             });
@@ -136,3 +136,11 @@ $(document).ready(function () {
         }
     });
 });
+/*跳转登录界面*/
+function toLogin() {
+    location.href = '/login?result=fail';
+}
+
+function toRegister() {
+    location.href = '/register';
+}

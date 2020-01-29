@@ -85,7 +85,7 @@ public class ExpCtrl {
         } else {
             resultMap.put("message", "请上传参数");
         }
-        System.out.println(expendList);
+//        System.out.println(expendList);
         return resultMap;
     }
 
@@ -102,7 +102,7 @@ public class ExpCtrl {
             resultMap.put("dataDic", dictionarys);
             resultMap.put("dataExpT", expendTypes);
         }
-        System.out.println(resultMap);
+//        System.out.println(resultMap);
         return resultMap;
     }
 

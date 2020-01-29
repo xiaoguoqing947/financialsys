@@ -59,7 +59,7 @@ public class UserCtrl {
         } else {
             resultMap.put("message", "请上传参数");
         }
-        System.out.println(userList);
+//        System.out.println(userList);
         return resultMap;
     }
 

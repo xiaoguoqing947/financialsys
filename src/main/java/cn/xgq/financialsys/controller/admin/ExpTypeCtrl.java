@@ -27,7 +27,7 @@ public class ExpTypeCtrl {
             List<ExpendType> expendTypeList = expendTypeSer.listExpendType();
             resultMap.put("data", expendTypeList);
             resultMap.put("status", "success");
-            System.out.println(expendTypeList);
+//            System.out.println(expendTypeList);
         }
         return resultMap;
     }
