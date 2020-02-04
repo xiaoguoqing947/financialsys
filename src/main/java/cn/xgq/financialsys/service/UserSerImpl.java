@@ -75,7 +75,7 @@ public class UserSerImpl implements UserSer {
     }
 
     @Override
-    public boolean updatePwd(UserLoginForm userLoginForm) {
+    public boolean updatePwd(User userLoginForm) {
         int num = 0;
         try {
             num = userMapper.updatePwdByUname(userLoginForm.getUsername(),userLoginForm.getPassword());

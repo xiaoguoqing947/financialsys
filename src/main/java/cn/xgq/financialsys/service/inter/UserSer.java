@@ -24,7 +24,7 @@ public interface UserSer {
 
     int getUserPower(String username);
 
-    boolean updatePwd(UserLoginForm userLoginForm);
+    boolean updatePwd(User userLoginForm);
 
     int findCount(Map<String, Object> searchMap);
 

@@ -101,9 +101,9 @@ public class LoginCtrl {
     @PostMapping("/api/recoverPwd")
     public Map<String,Object> recoverPwd(@RequestParam String pwd, HttpServletRequest request) {
         Map<String,Object> resultMap=new HashMap<String ,Object>();
-        UserLoginForm userLoginForm = (UserLoginForm) request.getSession().getAttribute("admin");
-        userLoginForm.setPassword(pwd);
-        if(userSer.updatePwd(userLoginForm)){
+        User user = (User) request.getSession().getAttribute("admin");
+        user.setPassword(pwd);
+        if(userSer.updatePwd(user)){
             resultMap.put("status","success");
         }else{
             resultMap.put("status","fail");
@@ -114,8 +114,9 @@ public class LoginCtrl {
     @ResponseBody
     @PostMapping("/api/validPwd")
     public boolean validPwd(@RequestParam String oldPwd, HttpServletRequest request) {
-//        System.out.println(oldPwd);
-        UserLoginForm userLoginForm = (UserLoginForm) request.getSession().getAttribute("admin");
+        User user = (User) request.getSession().getAttribute("admin");
+        UserLoginForm userLoginForm=new UserLoginForm();
+        userLoginForm.setUsername(user.getUsername());
         userLoginForm.setPassword(oldPwd);
         boolean flag=userSer.login(userLoginForm);
         return flag;
