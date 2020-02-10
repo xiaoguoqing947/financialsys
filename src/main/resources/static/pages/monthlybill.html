@@ -1,0 +1,102 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>月账单</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">主界面</a></li>
+                    <li class="breadcrumb-item active">月账单项详情</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-info"></i>月详情账单</h5>
+                    月详情账单描述的是指该月各项消费指标的消费具体金额
+                </div>
+
+
+                <!-- Main content -->
+                <div class="invoice p-3 mb-3">
+                    <!-- title row -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>
+                                <i class="fas fa-globe"></i> 用户名
+                                <small class="float-right">当月时间 : <span id="time"></span></small>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>消费类型</th>
+                                    <th>消费描述</th>
+                                    <th>消费金额</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>当月购物开销</td>
+                                    <td>服饰美容，生活日用</td>
+                                    <td id="shopprice">$64.50</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>当月悦乐开销</td>
+                                    <td>文教娱乐，运动健康</td>
+                                    <td id="joyprice">$50.00</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>当月其他开销</td>
+                                    <td>饮食，交通出行，住房缴费，通讯物流，其他消费</td>
+                                    <td id="otherprice">$50.00</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-6">
+                            <p class="lead">支付方式:</p>
+                            <img src="/img/paypal2.png" alt="Paypal">
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6">
+                            <p class="lead"> <span id="month"></span>月份</p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th style="width:50%">消费总金额:</th>
+                                        <td id="totalprice">$250.30</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/mouthlybill/monthlybill.js"></script>

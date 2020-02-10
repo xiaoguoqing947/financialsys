@@ -154,4 +154,18 @@ public class StatisticsCtrl {
         return resultMap;
     }
 
+    @PostMapping("/monthlybill")
+    @ResponseBody
+    public Map<String, Object> monthlybill(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> searchMap = new HashMap<String, Object>();
+        User user = (User) request.getSession().getAttribute("admin");
+        searchMap.put("expendUser", user.getUsername());//查询指定用户的账单
+        if(ValidateMethod.isTokenCheck(request)){
+            VoExpPrice voExpPrice=expendSer.findExpPrice(searchMap);
+            resultMap.put("dataTable",voExpPrice);
+        }
+        return resultMap;
+    }
+
 }
