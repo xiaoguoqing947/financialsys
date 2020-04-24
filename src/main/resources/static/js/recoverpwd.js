@@ -33,7 +33,7 @@ $("#recoverForm").validate({
             "success":function(data){
                 if (data.status == 'success') {
                     alert('修改成功');
-                    // location.href='/api/sysadmin';
+                    location.href='/login';
                 } else if (data.status == 'fail') {
                     alert('修改失败')
                 }
