@@ -176,7 +176,7 @@
       <if test="incomeUser !=null">
         and a.income_user = #{incomeUser}
       </if>
-    </where>
+    </where>  order by a.income_date desc
     <if test="pageSize != null">
       <if test="currentPage != null">
         limit #{indexCount},#{pageSize}

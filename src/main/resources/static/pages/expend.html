@@ -63,7 +63,7 @@
                                                 <div class="form-group">
                                                     <label for="expendPrice" class="col-sm-3 control-label">支出金额:<font color="red">*</font></label>
                                                     <div class="input-group col-sm-9">
-                                                        <input class="form-control" id="expendPrice" name="expendPrice" type="text">
+                                                        <input class="form-control" id="expendPrice" name="expendPrice" type="number" onkeyup="(this.v=function(){this.value=this.value.replace(/-/g,'');}).call(this)">
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                         <div class="form-group">
                             <label for="udExpPrice" class="col-sm-3 control-label">支出金额:<font color="red">*</font></label>
                             <div class="input-group col-sm-9">
-                                <input class="form-control" id="udExpPrice" name="udExpPrice" type="text">
+                                <input class="form-control" id="udExpPrice" name="udExpPrice" type="text" onkeyup="(this.v=function(){this.value=this.value.replace(/-/g,'');}).call(this)">
                                 <span class="input-group-addon">.00</span>
                             </div>
                         </div>

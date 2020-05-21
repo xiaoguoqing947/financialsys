@@ -175,7 +175,7 @@
       <if test="expendUser !=null">
         and a.expend_user = #{expendUser}
       </if>
-    </where>
+    </where> order by a.expend_date desc
     <if test="pageSize != null">
       <if test="currentPage != null">
         limit #{indexCount},#{pageSize}

@@ -7,9 +7,9 @@
             <div class="col-md-6">
                 <div class="input-group">
                     <span class="input-group-addon">收入金额</span>
-                    <input type="text" id="queryMinPrice" name="queryMinPrice" placeholder="金额最小值">￥
+                    <input type="text" id="queryMinPrice" name="queryMinPrice" placeholder="金额最小值" onkeyup="(this.v=function(){this.value=this.value.replace(/-/g,'');}).call(this)">￥
                     <strong>-</strong>&nbsp;&nbsp;
-                    <input type="text" id="queryMaxPrice" name="queryMaxPrice" placeholder="金额最大值">￥
+                    <input type="text" id="queryMaxPrice" name="queryMaxPrice" placeholder="金额最大值" onkeyup="(this.v=function(){this.value=this.value.replace(/-/g,'');}).call(this)">￥
                 </div>
             </div>
             <div class="col-md-3">
@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <label for="incomePrice" class="col-sm-3 control-label">收入金额:<font color="red">*</font></label>
                             <div class="input-group col-sm-9">
-                                <input class="form-control" id="incomePrice" name="incomePrice" type="text">
+                                <input class="form-control" id="incomePrice" name="incomePrice" type="text" onkeyup="(this.v=function(){this.value=this.value.replace(/-/g,'');}).call(this)">
                                 <span class="input-group-addon">.00</span>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                         <div class="form-group">
                             <label for="udIncPrice" class="col-sm-3 control-label">收入金额:<font color="red">*</font></label>
                             <div class="input-group col-sm-9">
-                                <input class="form-control" id="udIncPrice" name="udIncPrice" type="text">
+                                <input class="form-control" id="udIncPrice" name="udIncPrice" type="text" onkeyup="(this.v=function(){this.value=this.value.replace(/-/g,'');}).call(this)">
                                 <span class="input-group-addon">.00</span>
                             </div>
                         </div>
